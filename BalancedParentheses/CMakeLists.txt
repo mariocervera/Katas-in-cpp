@@ -19,5 +19,5 @@ if(NOT googletest_POPULATED)
 endif()
 
 # Process the two subdirectories of the project
-#add_subdirectory(src)
+add_subdirectory(src)
 add_subdirectory(tests)

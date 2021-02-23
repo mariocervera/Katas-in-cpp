@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
+#include <BalancedParentheses.hpp>
 
 TEST(aaa, bbb) {
-	
-  EXPECT_TRUE(true);
+	BalanceChecker checker;
+	EXPECT_TRUE(checker.check(""));
 }
