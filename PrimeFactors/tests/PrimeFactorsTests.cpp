@@ -40,17 +40,17 @@ TEST_F(PrimeFactorsCalculatorFixture, 4_shouldReturn_2_2) {
 }
 
 TEST_F(PrimeFactorsCalculatorFixture, 6_shouldReturn_2_3) {
-  assertFactors(6, { 2, 3 });
+  assertFactors(6, {2, 3});
 }
 
 TEST_F(PrimeFactorsCalculatorFixture, 8_shouldReturn_2_2_2) {
-  assertFactors(8, { 2, 2, 2 });
+  assertFactors(8, {2, 2, 2});
 }
 
 TEST_F(PrimeFactorsCalculatorFixture, 9_shouldReturn_3_3) {
-  assertFactors(9, { 3, 3 });
+  assertFactors(9, {3, 3});
 }
 
 TEST_F(PrimeFactorsCalculatorFixture, AcceptanceTest) {
-  assertFactors(2*2*3*5*5*7*7*11, { 2, 2, 3, 5, 5, 7, 7, 11 });
+  assertFactors(2*2*3*5*5*7*7*11, {2, 2, 3, 5, 5, 7, 7, 11});
 }
