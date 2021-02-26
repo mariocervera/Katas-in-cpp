@@ -5,5 +5,5 @@ using namespace std;
 
 class CombinedNumberCalculator {
 public: 
-  string getCombinedNumber(vector<unsigned> numbers);
+  string getCombinedNumber(vector<unsigned> &numbers);
 };
