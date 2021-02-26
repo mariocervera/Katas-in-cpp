@@ -24,18 +24,20 @@ protected:
 ///
 /// Tests
 /// 
-TEST_F(CombinedNumberCalculatorFixture, EmptyList_shouldReturn_EmptyString) {
+TEST_F(CombinedNumberCalculatorFixture, EmptyList_shouldReturnEmptyString) {
   assertCombinedNumber({}, "");
 }
 
-TEST_F(CombinedNumberCalculatorFixture, OneNumber_shouldReturn_TheNumberAsString) {
+TEST_F(CombinedNumberCalculatorFixture, OneNumber_shouldReturnTheNumberAsString) {
   assertCombinedNumber({4}, "4");
 }
 
-TEST_F(CombinedNumberCalculatorFixture, TwoOrderedNumbers_shouldReturn_ConcatenatedNumbers) {
+TEST_F(CombinedNumberCalculatorFixture, TwoNumbersInRightPosition_shouldReturnCorrectCombinedNumber) {
   assertCombinedNumber({4, 20}, "420");
+  assertCombinedNumber({20, 1}, "201");
 }
 
-TEST_F(CombinedNumberCalculatorFixture, TwoUnorderedNumbers_shouldReturn_ReversedConcatenation) {
-  assertCombinedNumber({ 20, 4 }, "420");
+TEST_F(CombinedNumberCalculatorFixture, SeveralNumbersWithDistinctHighestDigit_shouldReturnCorrectCombinedNumber) {
+  assertCombinedNumber({50, 2, 1, 9}, "95021");
+  assertCombinedNumber({105, 52, 23, 331, 8 }, "85233123105");
 }
