@@ -57,7 +57,6 @@ TEST_F(CombinedNumberCalculatorFixture, WholeNumberIsPrefixAndRemainderIsBigger_
 }
 
 TEST_F(CombinedNumberCalculatorFixture, WholeNumberIsPrefixAndRemainderStartsWithSameDigit_shouldReturnCorrectCombinedNumber) {
-  ASSERT_TRUE(true);
-  //assertCombinedNumber({ 4, 445, 2, 7 }, "744542");
-  //assertCombinedNumber({ 4, 441, 2, 7 }, "744412");
+  assertCombinedNumber({ 4, 445, 2, 7 }, "744542");
+  assertCombinedNumber({ 4, 441, 2, 7 }, "744412");
 }

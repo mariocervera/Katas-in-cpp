@@ -25,11 +25,19 @@ string removeCommonPrefix(string &s1, string &s2) {
   return prefix;
 }
 
+const char& getFirstDifferentDigit(string& s, const char& ch) {
+  for (char& c : s)
+    if (c != ch)
+      return c;
+  return ch;
+}
+
 bool compareContainedPrefix(string& s1, string& s2, string& prefix) {
+  const char &highestOrderDigit = prefix[0];
   if (s1.size() == 0)
-    return !(s2[0] > prefix[0]);
+    return !(getFirstDifferentDigit(s2, highestOrderDigit) > highestOrderDigit);
   else if (s2.size() == 0)
-    return (s1[0] > prefix[0]);
+    return (getFirstDifferentDigit(s1, highestOrderDigit) > highestOrderDigit);
 
   return (s1 > s2);
 }
