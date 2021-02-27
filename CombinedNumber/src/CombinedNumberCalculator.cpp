@@ -1,9 +1,12 @@
 #include "CombinedNumberCalculator.hpp"
 #include <algorithm> 
 
-string getCommonPrefix(string& s1, string& s2, unsigned max_length) {
+string getCommonPrefix(string& s1, string& s2) {
+  unsigned max_length = s1.size() > s2.size() ? s2.size() : s1.size();
+  if (max_length == 0)
+    return "";
+
   string prefix = "";
-  
   int i = 0;
   while (i < max_length && s1[i] == s2[i]) {
     prefix += s1[i];
@@ -13,15 +16,12 @@ string getCommonPrefix(string& s1, string& s2, unsigned max_length) {
   return prefix;
 }
 
-void removeCommonPrefix(string &s1, string &s2) {
-  unsigned max_length = s1.size() > s2.size() ? s2.size() : s1.size();
-  if (max_length == 0)
-    return;
-
-  string prefix = getCommonPrefix(s1, s2, max_length);
-
+string removeCommonPrefix(string &s1, string &s2) {
+  string prefix = getCommonPrefix(s1, s2);
   s1.erase(0, prefix.size());
   s2.erase(0, prefix.size());
+
+  return prefix;
 }
 
 // A function that compares two numbers (as strings) by length and value.
@@ -30,7 +30,7 @@ bool compareByLengthAndValue(unsigned i, unsigned j) {
   string s1 = to_string(i);
   string s2 = to_string(j);
 
-  removeCommonPrefix(s1, s2);
+  string prefix = removeCommonPrefix(s1, s2);
 
   if (s1.size() == 0)
     return true;
