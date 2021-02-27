@@ -1,21 +1,18 @@
 #include "CombinedNumberCalculator.hpp"
 #include <algorithm> 
 
-// Helper static functions.
+// Helper functions.
 
-static unsigned getMaxPrefixLength(string& s1, string& s2) {
+static unsigned getMaxLength(string& s1, string& s2) {
   return s1.size() > s2.size() ? s2.size() : s1.size();
 }
 
 static string getCommonPrefix(string& s1, string& s2) {
   string prefix = "";
-  int i = 0;
-  unsigned len = getMaxPrefixLength(s1, s2);
+  unsigned len = getMaxLength(s1, s2); 
   
-  while (i < len && s1[i] == s2[i]) {
+  for (int i = 0; i < len && s1[i] == s2[i]; ++i)
     prefix += s1[i];
-    ++i;
-  }
 
   return prefix;
 }
