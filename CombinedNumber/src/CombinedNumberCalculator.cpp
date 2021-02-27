@@ -1,12 +1,13 @@
 #include "CombinedNumberCalculator.hpp"
 #include <algorithm> 
 
-string getCommonPrefix(string& s1, string& s2) {
-  unsigned max_length = s1.size() > s2.size() ? s2.size() : s1.size();
-  if (max_length == 0)
-    return "";
+static unsigned getMaximumPrefixLength(string& s1, string& s2) {
+  return s1.size() > s2.size() ? s2.size() : s1.size();
+}
 
+string getCommonPrefix(string& s1, string& s2) {
   string prefix = "";
+  unsigned max_length = getMaximumPrefixLength(s1, s2);
   int i = 0;
   while (i < max_length && s1[i] == s2[i]) {
     prefix += s1[i];
@@ -24,27 +25,36 @@ string removeCommonPrefix(string &s1, string &s2) {
   return prefix;
 }
 
-// A function that compares two numbers (as strings) by length and value.
-// If one of the numbers if a prefix of the other, it appears first in sorted order.
-bool compareByLengthAndValue(unsigned i, unsigned j) {
+bool compareContainedPrefix(string& s1, string& s2, string& prefix) {
+  if (s1.size() == 0)
+    return !(s2[0] > prefix[0]);
+  else if (s2.size() == 0)
+    return (s1[0] > prefix[0]);
+
+  return (s1 > s2);
+}
+
+// A function that compares two numbers as strings. Returns true when s1 is greater than
+// or equal to s2. If one of the numbers if a prefix of the other, it is handled as a
+// special case. This function causes the 'sort' function to sort in decreasing order. 
+bool compareNumbers(unsigned i, unsigned j) {
+  if (i == j)
+    return true;
+
   string s1 = to_string(i);
   string s2 = to_string(j);
 
   string prefix = removeCommonPrefix(s1, s2);
-
-  if (s1.size() == 0)
-    return true;
-  else if (s2.size() == 0)
-    return false;
+  if (s1.size() == 0 || s2.size() == 0)
+    return compareContainedPrefix(s1, s2, prefix);
   
   return (s1 > s2);
 }
 
 string CombinedNumberCalculator::getCombinedNumber(vector<unsigned> &numbers) {
+  sort(numbers.begin(), numbers.end(), compareNumbers);
+
   string combinedNumber = "";
-
-  sort(numbers.begin(), numbers.end(), compareByLengthAndValue);
-
   for (unsigned number : numbers) {
     combinedNumber += to_string(number);
   }
