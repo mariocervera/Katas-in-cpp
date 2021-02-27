@@ -25,19 +25,27 @@ static string removeCommonPrefix(string &s1, string &s2) {
   return prefix;
 }
 
-static const char& getFirstDifferentChar(string &inputStr, const char &inputChar) {
+static char getFirstDifferentChar(string &inputStr, const char &inputChar) {
   for (char& c : inputStr)
     if (c != inputChar)
       return c;
-  return inputChar;
+  return '-';
 }
 
 static bool compareContainedPrefix(string& s1, string& s2, string& prefix) {
   const char &highestOrderPrefixDigit = prefix[0];
-  if (s1.size() == 0)
-    return !(getFirstDifferentChar(s2, highestOrderPrefixDigit) > highestOrderPrefixDigit);
-  else
-    return (getFirstDifferentChar(s1, highestOrderPrefixDigit) > highestOrderPrefixDigit);
+  if (s1.size() == 0) {
+    char differentChar = getFirstDifferentChar(s2, highestOrderPrefixDigit);
+    if (differentChar == '-')
+      return false;
+    return !(differentChar > highestOrderPrefixDigit);
+  }
+  else {
+    char differentChar = getFirstDifferentChar(s1, highestOrderPrefixDigit);
+    if (differentChar == '-')
+      return true;
+    return (differentChar > highestOrderPrefixDigit);
+  }
 }
 
 static bool compareNumbers(unsigned i, unsigned j) {
