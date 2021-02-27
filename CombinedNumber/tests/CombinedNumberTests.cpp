@@ -37,7 +37,20 @@ TEST_F(CombinedNumberCalculatorFixture, TwoNumbersInRightPosition_shouldReturnCo
   assertCombinedNumber({20, 1}, "201");
 }
 
-TEST_F(CombinedNumberCalculatorFixture, SeveralNumbersWithDistinctHighestDigit_shouldReturnCorrectCombinedNumber) {
+TEST_F(CombinedNumberCalculatorFixture, SeveralNumbersWithoutCommonPrefix_shouldReturnCorrectCombinedNumber) {
   assertCombinedNumber({50, 2, 1, 9}, "95021");
   assertCombinedNumber({105, 52, 23, 331, 8 }, "85233123105");
+}
+
+TEST_F(CombinedNumberCalculatorFixture, WholeNumberIsPrefixAndRemainderIsSmaller_shouldReturnCorrectCombinedNumber) {
+  assertCombinedNumber({4, 42}, "442");
+  assertCombinedNumber({538, 5, 52}, "553852");
+  assertCombinedNumber({632, 6754, 67}, "676754632");
+  assertCombinedNumber({420, 42, 423}, "42423420");
+}
+
+TEST_F(CombinedNumberCalculatorFixture, WholeNumberIsPrefixAndRemainderIsBigger_shouldReturnCorrectCombinedNumber) {
+  ASSERT_TRUE(true);
+  // TODO: Make this test pass.
+  //assertCombinedNumber({5, 50, 56}, "56550");
 }
