@@ -42,7 +42,7 @@ static bool compareContainedPrefix(string& s1, string& s2, string& prefix) {
 
 static bool compareNumbers(unsigned i, unsigned j) {
   if (i == j)
-    return true;
+    return false;
 
   string s1 = to_string(i);
   string s2 = to_string(j);
@@ -57,7 +57,7 @@ static bool compareNumbers(unsigned i, unsigned j) {
 // This is the main function of the program.
 // It calculates the combined number given the array of input numbers.
 // The function executes a sorting preprocessing step. The comparator function returns true
-// when i >= j. This sorts in decreasing order. If one of the numbers if a prefix of the
+// when i > j. This sorts in decreasing order. If one of the numbers if a prefix of the
 // other, it is handled as a special case.
 string CombinedNumberCalculator::getCombinedNumber(vector<unsigned> &numbers) {
   sort(numbers.begin(), numbers.end(), compareNumbers);

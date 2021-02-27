@@ -42,6 +42,11 @@ TEST_F(CombinedNumberCalculatorFixture, SeveralNumbersWithoutCommonPrefix_should
   assertCombinedNumber({105, 52, 23, 331, 8 }, "85233123105");
 }
 
+TEST_F(CombinedNumberCalculatorFixture, DuplicateNumbers_shouldReturnCorrectCombinedNumber) {
+  assertCombinedNumber({4, 25, 4, 73}, "734425");
+  assertCombinedNumber({56, 1, 32, 1}, "563211");
+}
+
 TEST_F(CombinedNumberCalculatorFixture, WholeNumberIsPrefixAndRemainderIsSmaller_shouldReturnCorrectCombinedNumber) {
   assertCombinedNumber({4, 42}, "442");
   assertCombinedNumber({538, 5, 52}, "553852");
