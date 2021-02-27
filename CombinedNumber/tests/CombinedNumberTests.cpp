@@ -76,3 +76,7 @@ TEST_F(CombinedNumberCalculatorFixture, WholeNumberIsPrefixAndRemainderStartsAnd
   assertCombinedNumber({53, 535, 6}, "653553");
   assertCombinedNumber({53, 535, 5}, "553553");
 }
+
+TEST_F(CombinedNumberCalculatorFixture, AcceptanceTest) {
+  assertCombinedNumber({105, 3, 420, 336, 52, 8, 42, 423, 535, 5, 667, 23, 331, 8, 53, 66}, "88667665535535242423420336333123105");
+}
