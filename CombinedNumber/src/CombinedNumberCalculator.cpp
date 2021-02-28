@@ -12,13 +12,20 @@ static char getFirstDifferentDigit(const string &number, const char &digitToComp
   return '-';
 }
 
-static bool compareNumberWithPrefix(const string &s, const string &prefix) {
-  const char &highestOrderPrefixDigit = prefix[0];
-  string suffix = s.substr(prefix.size(), s.size());
-  char firstDifferentDigit = getFirstDifferentDigit(suffix, highestOrderPrefixDigit);
-  if (firstDifferentDigit == '-')
+static bool compareNumberWithPrefix(const string &number, const string &prefix) {
+  const char &highestOrderDigit = prefix[0];
+  string numberSuffix = number.substr(prefix.size(), number.size());
+  char firstDifferentDigit = getFirstDifferentDigit(numberSuffix, highestOrderDigit);
+  
+  if (firstDifferentDigit == '-') {
+    char firstDifferentDigit_Prefix = getFirstDifferentDigit(prefix, highestOrderDigit);
+    if (firstDifferentDigit_Prefix != '-') {
+      return firstDifferentDigit_Prefix < highestOrderDigit;
+    }
     return true;
-  return (firstDifferentDigit > highestOrderPrefixDigit);
+  }
+
+  return firstDifferentDigit > highestOrderDigit;
 }
 
 static bool handlePrefixNumber(const string& s1, const string& s2, const string& prefix) {
@@ -43,6 +50,9 @@ static string getCommonPrefix(const string& s1, const string& s2) {
 }
 
 static bool compareNumbers(unsigned i, unsigned j) {
+  if (i == j)
+    return false;
+  
   const string &s1 = to_string(i);
   const string &s2 = to_string(j);
 
@@ -50,7 +60,7 @@ static bool compareNumbers(unsigned i, unsigned j) {
   if (s1 == prefix || s2 == prefix)
     return handlePrefixNumber(s1, s2, prefix);
   
-  return (s1 > s2);
+  return s1 > s2;
 }
 
 //

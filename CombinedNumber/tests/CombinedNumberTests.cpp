@@ -24,6 +24,8 @@ protected:
 ///
 /// Tests
 /// 
+
+
 TEST_F(CombinedNumberCalculatorFixture, EmptyList_shouldReturnEmptyString) {
   assertCombinedNumber({}, "");
 }
@@ -75,8 +77,12 @@ TEST_F(CombinedNumberCalculatorFixture, WholeNumberIsPrefixAndRemainderStartsAnd
   assertCombinedNumber({53, 535, 1}, "535531");
   assertCombinedNumber({53, 535, 6}, "653553");
   assertCombinedNumber({53, 535, 5}, "553553");
+  assertCombinedNumber({373, 37}, "37373");
+  assertCombinedNumber({626, 62}, "62662");
 }
 
 TEST_F(CombinedNumberCalculatorFixture, AcceptanceTest) {
-  assertCombinedNumber({105, 3, 78, 420, 336, 52, 8, 42, 423, 535, 78, 5, 667, 23, 331, 8, 53, 66, 78}, "88787878667665535535242423420336333123105");
+  assertCombinedNumber({ 105, 62, 3, 78, 420, 336, 52, 8, 42, 626, 373, 423, 535, 78, 5, 667, 37, 23, 331, 8, 53, 66, 78 }, "887878786676662662553553524242342037373336333123105");
 }
+
+
