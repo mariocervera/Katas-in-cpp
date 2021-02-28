@@ -3,33 +3,33 @@
 
 // Helper functions.
 
-static char getFirstCharDifferentFrom(string &inputStr, const char &charToCompare) {
-  for (char& c : inputStr)
-    if (c != charToCompare)
-      return c;
+static char getFirstDifferentDigit(const string &number, const char &digitToCompare) {
+  for (const char &digit : number)
+    if (digit != digitToCompare)
+      return digit;
   return '-';
 }
 
-static bool compareContainedPrefix(string &s, string &prefix) {
+static bool compareContainedPrefix(const string &s, const string &prefix) {
   const char &highestOrderPrefixDigit = prefix[0];
-  char firstDifferentDigit = getFirstCharDifferentFrom(s, highestOrderPrefixDigit);
+  char firstDifferentDigit = getFirstDifferentDigit(s, highestOrderPrefixDigit);
   if (firstDifferentDigit == '-')
     return true;
   return (firstDifferentDigit > highestOrderPrefixDigit);
 }
 
-static bool compareContainedPrefix(string& s1, string& s2, string& prefix) {
-  if (s1.size() == 0)
-    return !compareContainedPrefix(s2, prefix);
-  else
-    return compareContainedPrefix(s1, prefix);
+static bool compareContainedPrefix(const string &suffix_s1, const string &suffix_s2, const string &prefix) {
+  if (suffix_s1.size() == 0)
+    return !compareContainedPrefix(suffix_s2, prefix);
+  else // suffix_s2 = 0
+    return compareContainedPrefix(suffix_s1, prefix);
 }
 
-static unsigned getMaxLength(string& s1, string& s2) {
+static unsigned getMaxLength(const string &s1, const string &s2) {
   return s1.size() > s2.size() ? s2.size() : s1.size();
 }
 
-static string getCommonPrefix(string& s1, string& s2) {
+static string getCommonPrefix(const string &s1, const string &s2) {
   string prefix = "";
   unsigned len = getMaxLength(s1, s2); 
   
