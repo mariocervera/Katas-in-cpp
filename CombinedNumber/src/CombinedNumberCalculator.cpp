@@ -1,45 +1,42 @@
 #include "CombinedNumberCalculator.hpp"
 #include <algorithm> 
 
-//
-// Helper functions.
-//
+///
+/// Helper functions.
+///
 
 static char getFirstDifferentDigit(const string &number, const char &digitToCompare) {
   for (const char &digit : number)
     if (digit != digitToCompare)
       return digit;
-  return '-';
+  return '\0';
 }
 
+// Example: number (421) and prefix (42).
 static bool compareNumberWithPrefix(const string &number, const string &prefix) {
   const char &highestOrderDigit = prefix[0];
-  string numberSuffix = number.substr(prefix.size(), number.size());
-  char firstDifferentDigit = getFirstDifferentDigit(numberSuffix, highestOrderDigit);
+  string suffix = number.substr(prefix.size(), number.size());
+
+  const char &firstDifferentDigit_FromSuffix = getFirstDifferentDigit(suffix, highestOrderDigit);
+  if (firstDifferentDigit_FromSuffix != '\0')
+    return firstDifferentDigit_FromSuffix < highestOrderDigit;
   
-  if (firstDifferentDigit == '-') {
-    char firstDifferentDigit_Prefix = getFirstDifferentDigit(prefix, highestOrderDigit);
-    if (firstDifferentDigit_Prefix != '-') {
-      return firstDifferentDigit_Prefix < highestOrderDigit;
-    }
-    return true;
-  }
-
-  return firstDifferentDigit > highestOrderDigit;
+  const char &firstDifferentDigit_FromPrefix = getFirstDifferentDigit(prefix, highestOrderDigit);
+  return firstDifferentDigit_FromPrefix > highestOrderDigit;
 }
 
-static bool handlePrefixNumber(const string& s1, const string& s2, const string& prefix) {
+static bool handlePrefixNumber(const string &s1, const string &s2, const string &prefix) {
   if (s1 == prefix)
-    return !compareNumberWithPrefix(s2, prefix);
-  else // s2 = prefix
-    return compareNumberWithPrefix(s1, prefix);
+    return compareNumberWithPrefix(s2, prefix);
+  else
+    return !compareNumberWithPrefix(s1, prefix);
 }
 
-static unsigned getMaxLength(const string& s1, const string& s2) {
+static unsigned getMaxLength(const string &s1, const string &s2) {
   return s1.size() > s2.size() ? s2.size() : s1.size();
 }
 
-static string getCommonPrefix(const string& s1, const string& s2) {
+static string getCommonPrefix(const string &s1, const string &s2) {
   string prefix = "";
   unsigned len = getMaxLength(s1, s2);
 
@@ -63,11 +60,11 @@ static bool compareNumbers(unsigned i, unsigned j) {
   return s1 > s2;
 }
 
-//
-// This is the entry point of the program.
-// In the sorting step, the comparator function returns i > j. This sorts in decreasing
-// order. The case when one number is a prefix of another is handled as a special case.
-//
+///
+/// This is the entry point of the program.
+/// In the sorting step, the comparator function returns i > j. This sorts in decreasing
+/// order. The case when one number is a prefix of another is handled as a special case.
+///
 
 string CombinedNumberCalculator::getCombinedNumber(vector<unsigned> &numbers) {
   sort(numbers.begin(), numbers.end(), compareNumbers);
