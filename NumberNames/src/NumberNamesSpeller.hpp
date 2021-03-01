@@ -2,7 +2,7 @@
 
 using namespace std;
 
-class NumberNamesCalculator {
+class NumberNamesSpeller {
 public: 
   string getNumberName(unsigned number);
 };
