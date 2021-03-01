@@ -28,3 +28,15 @@ protected:
 TEST_F(NumberNamesSpellerFixture, zero_shouldReturnNamedNumber) {
   assertNumberName(0, "zero");
 }
+
+TEST_F(NumberNamesSpellerFixture, singleDigit_shouldReturnNamedNumber) {
+  assertNumberName(1, "one");
+  assertNumberName(5, "five");
+  assertNumberName(7, "seven");
+}
+
+TEST_F(NumberNamesSpellerFixture, twoDigitsEndingInZero_shouldReturnNamedNumber) {
+  assertNumberName(20, "twenty");
+  assertNumberName(40, "forty");
+  assertNumberName(80, "eighty");
+}
