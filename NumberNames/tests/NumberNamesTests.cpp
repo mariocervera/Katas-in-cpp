@@ -46,3 +46,9 @@ TEST_F(NumberNamesSpellerFixture, twoDigitsNotStartingAtOne_shouldReturnNamedNum
   assertNumberName(63, "sixty three");
   assertNumberName(99, "ninety nine");
 }
+
+TEST_F(NumberNamesSpellerFixture, twoDigitsStartingAtOne_shouldReturnNamedNumber) {
+  assertNumberName(11, "eleven");
+  assertNumberName(14, "fourteen");
+  assertNumberName(16, "sixteen");
+}
