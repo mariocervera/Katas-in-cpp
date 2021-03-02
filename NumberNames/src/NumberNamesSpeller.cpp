@@ -27,9 +27,15 @@ static string handle2DigitNumber(unsigned number) {
   return result.substr(0, result.size() - 1);
 }
 
+static string handle3DigitNumber(unsigned number) {
+  return units[number / 100] + " hundred";
+}
+
 string NumberNamesSpeller::getNumberName(unsigned number) {
   const string inputNumber = to_string(number);
 
+  if (inputNumber.size() == 3)
+    return handle3DigitNumber(number);
   if (inputNumber.size() == 2)
     return handle2DigitNumber(number);
   else
