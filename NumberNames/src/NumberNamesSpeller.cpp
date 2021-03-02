@@ -16,6 +16,9 @@ static string handle1DigitNumber(unsigned number) {
 static string handle2DigitNumber(unsigned number) {
   const string inputNumber = to_string(number);
 
+  if (inputNumber.size() == 1)
+    return handle1DigitNumber(number);
+
   if (inputNumber[0] == '1')
     return firstTen[number % 10];
 
@@ -34,13 +37,19 @@ static string handle3DigitNumber(unsigned number) {
   return result;
 }
 
+static string handle4DigitNumber(unsigned number) {
+  return units[number / 1000] + " thousand";
+}
+
 string NumberNamesSpeller::getNumberName(unsigned number) {
   const string inputNumber = to_string(number);
 
+  if (inputNumber.size() == 4)
+    return handle4DigitNumber(number);
   if (inputNumber.size() == 3)
     return handle3DigitNumber(number);
   if (inputNumber.size() == 2)
     return handle2DigitNumber(number);
-  else
-    return handle1DigitNumber(number);
+  
+  return handle1DigitNumber(number);
 }
