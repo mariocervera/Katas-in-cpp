@@ -17,17 +17,24 @@ static string handleUnitNumber(unsigned number) {
   return units[number];
 }
 
-static string handle2DigitNumber(unsigned number) {
-  if (number < 10)
-    return handleUnitNumber(number);
+static string handleTensNumber(unsigned number) {
   if (number < 20)
     return firstTen[number % 10];
 
-  string _tens = tens[(number / 10) - 1];
-  if (number % 10 == 0)
-    return _tens;
+  string result = tens[(number / 10) - 1];
 
-  return _tens + " " + units[number % 10];
+  number %= 10;
+  if (number != 0)
+    result += " " + handleUnitNumber(number);
+
+  return result;
+}
+
+static string handle2DigitNumber(unsigned number) {
+  if (number < 10)
+    return handleUnitNumber(number);
+  
+  return handleTensNumber(number);
 }
 
 static string handleHundredNumber(unsigned number) {
