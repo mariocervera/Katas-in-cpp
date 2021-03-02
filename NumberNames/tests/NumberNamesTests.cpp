@@ -24,7 +24,6 @@ protected:
 ///
 /// Tests
 /// 
-
 TEST_F(NumberNamesSpellerFixture, zero_shouldReturnNamedNumber) {
   assertNumberName(0, "zero");
 }
@@ -85,8 +84,8 @@ TEST_F(NumberNamesSpellerFixture, fourDigitsWithoutIntermediateZeros_shouldRetur
 }
 
 TEST_F(NumberNamesSpellerFixture, fourDigitsWithIntermediateZeros_shouldReturnNamedNumber) {
-  assertNumberName(1101, "one thousand, one hundred and one");
   assertNumberName(1011, "one thousand and eleven");
+  assertNumberName(1501, "one thousand, five hundred and one");
   assertNumberName(2002, "two thousand and two");
   assertNumberName(3056, "three thousand and fifty six");
 }
@@ -104,9 +103,9 @@ TEST_F(NumberNamesSpellerFixture, fiveDigitsWithoutIntermediateZeros_shouldRetur
 }
 
 TEST_F(NumberNamesSpellerFixture, fiveDigitsWithIntermediateZeros_shouldReturnNamedNumber) {
-  assertNumberName(33001, "thirty three thousand and one");
+  assertNumberName(12609, "twelve thousand, six hundred and nine");
   assertNumberName(20022, "twenty thousand and twenty two");
-  assertNumberName(51009, "fifty one thousand and nine");
+  assertNumberName(33001, "thirty three thousand and one");
 }
 
 TEST_F(NumberNamesSpellerFixture, sixDigits_shouldReturnNamedNumber) {

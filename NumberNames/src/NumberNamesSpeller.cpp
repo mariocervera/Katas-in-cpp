@@ -1,62 +1,63 @@
 #include "NumberNamesSpeller.hpp"
 
-static string units[] = {"zero", "one", "two", "three", "four",
+static string zeroToTen[] = {"zero", "one", "two", "three", "four",
                            "five", "six", "seven", "eight", "nine"};
 
-static string firstTen[] = { "ten", "eleven", "twelve", "thirteen", "fourteen",
-                     "fifteen", "sixteen", "seventeen", "eighteen" "nineteen" };
+static string tenToNineteen[] = {"ten", "eleven", "twelve", "thirteen", "fourteen",
+                     "fifteen", "sixteen", "seventeen", "eighteen" "nineteen"};
 
-static string tens[] = { "zero", "ten", "twenty", "thirty", "forty", "fifty",
+static string tens[] = {"zero", "ten", "twenty", "thirty", "forty", "fifty",
                            "sixty", "seventy", "eighty", "ninety"};
 
-static string separator(unsigned number) {
-  return (number > 99) ? ", " : " and ";
+static string tensSeparator() { return " "; }
+
+static string hundredSeparator() { return " and "; }
+
+static string thousandSeparator(unsigned leastSignificantDigits) {
+  return (leastSignificantDigits > 99) ? ", " : " and ";
 }
 
-static string numberSuffix(unsigned number,  const string &separator,
-                           string(*handleNumberFunction)(unsigned)) {
+static string suffix(const string &separator, string(*handleNumberFunction)(unsigned),
+                     unsigned number) {
   if (number != 0)
     return separator + handleNumberFunction(number);
   return "";
 }
 
 static string handleUnitNumber(unsigned number) {
-  return units[number];
+  if(number < 10)
+    return zeroToTen[number];
+  return tenToNineteen[number%10];
 }
 
 static string handleTensNumber(unsigned number) {
-  if (number < 20)
-    return firstTen[number % 10];
-
-  string result = tens[number / 10];
+  string result = tens[number/10];
   number %= 10;
-  return result + numberSuffix(number, " ", &handleUnitNumber);
+  return result + suffix(tensSeparator(), &handleUnitNumber, number);
 }
 
 static string handle2DigitNumber(unsigned number) {
-  if (number < 10)
+  if (number < 20)
     return handleUnitNumber(number);
-  
   return handleTensNumber(number);
 }
 
 static string handleHundredNumber(unsigned number) {
   string result = handleUnitNumber(number/100) + " hundred";
   number %= 100;
-  return result + numberSuffix(number, separator(number), &handle2DigitNumber);
+  return result + suffix(hundredSeparator(), &handle2DigitNumber, number);
 }
 
 static string handle3DigitNumber(unsigned number) {
   if (number < 100)
     return handle2DigitNumber(number);
-
   return handleHundredNumber(number);
 }
 
 static string handleThousandNumber(unsigned number) {
   string result = handle3DigitNumber(number/1000) + " thousand";
   number %= 1000;
-  return result + numberSuffix(number, separator(number), &handle3DigitNumber);
+  return result + suffix(thousandSeparator(number), &handle3DigitNumber, number);
 }
 
 string NumberNamesSpeller::getNumberName(unsigned number) {
