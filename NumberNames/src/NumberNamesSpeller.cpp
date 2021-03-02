@@ -13,13 +13,13 @@ static string separator(unsigned number) {
   return (number > 99) ? ", " : " and ";
 }
 
-static string handle1DigitNumber(unsigned number) {
+static string handleUnitNumber(unsigned number) {
   return units[number];
 }
 
 static string handle2DigitNumber(unsigned number) {
   if (number < 10)
-    return handle1DigitNumber(number);
+    return handleUnitNumber(number);
   if (number < 20)
     return firstTen[number % 10];
 
@@ -30,17 +30,21 @@ static string handle2DigitNumber(unsigned number) {
   return _tens + " " + units[number % 10];
 }
 
+static string handleHundredNumber(unsigned number) {
+  string result = handleUnitNumber(number/100) + " hundred";
+
+  number %= 100;
+  if (number != 0)
+    result += separator(number) + handle2DigitNumber(number);
+
+  return result;
+}
+
 static string handle3DigitNumber(unsigned number) {
   if (number < 100)
     return handle2DigitNumber(number);
 
-  string result = units[number / 100] + " hundred";
-
-  number %= 100;
-  if (number != 0) 
-    result += separator(number) + handle2DigitNumber(number);
-
-  return result;
+  return handleHundredNumber(number);
 }
 
 static string handleThousandNumber(unsigned number) {
@@ -55,7 +59,7 @@ static string handleThousandNumber(unsigned number) {
 
 string NumberNamesSpeller::getNumberName(unsigned number) {
   if (number < 10)
-    return handle1DigitNumber(number);
+    return handleUnitNumber(number);
   if(number < 100)
     return handle2DigitNumber(number);
   if (number < 1000)
