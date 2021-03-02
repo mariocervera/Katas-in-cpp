@@ -38,7 +38,10 @@ static string handle3DigitNumber(unsigned number) {
 }
 
 static string handle4DigitNumber(unsigned number) {
-  return units[number / 1000] + " thousand";
+  string result = units[number / 1000] + " thousand";
+  if (number % 1000 != 0)
+    result += ", " + handle3DigitNumber(number % 1000);
+  return result;
 }
 
 string NumberNamesSpeller::getNumberName(unsigned number) {
