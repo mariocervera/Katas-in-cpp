@@ -44,7 +44,7 @@ static string handle3DigitNumber(unsigned number) {
 }
 
 static string handle4DigitNumber(unsigned number) {
-  string result = units[number / 1000] + " thousand";
+  string result = handle1DigitNumber(number/1000) + " thousand";
 
   number %= 1000;
   if (number != 0) 
@@ -57,10 +57,8 @@ static string handle5DigitNumber(unsigned number) {
   string result = handle2DigitNumber(number/1000) + " thousand";
 
   number %= 1000;
-
-  if (number > 0) {
-    result += ", " + handle3DigitNumber(number);
-  }
+  if (number != 0)
+    result += separator(number) + handle3DigitNumber(number);
 
   return result;
 }

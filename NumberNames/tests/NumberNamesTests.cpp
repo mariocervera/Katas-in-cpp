@@ -102,3 +102,9 @@ TEST_F(NumberNamesSpellerFixture, fiveDigitsWithoutIntermediateZeros_shouldRetur
   assertNumberName(23545, "twenty three thousand, five hundred and forty five");
   assertNumberName(77946, "seventy seven thousand, nine hundred and forty six");
 }
+
+TEST_F(NumberNamesSpellerFixture, fiveDigitsWithIntermediateZeros_shouldReturnNamedNumber) {
+  assertNumberName(33001, "thirty three thousand and one");
+  assertNumberName(20022, "twenty thousand and twenty two");
+  assertNumberName(51009, "fifty one thousand and nine");
+}
