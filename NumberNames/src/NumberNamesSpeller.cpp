@@ -54,7 +54,15 @@ static string handle4DigitNumber(unsigned number) {
 }
 
 static string handle5DigitNumber(unsigned number) {
-  return handle2DigitNumber(number/1000) + " thousand";
+  string result = handle2DigitNumber(number/1000) + " thousand";
+
+  number %= 1000;
+
+  if (number > 0) {
+    result += ", " + handle3DigitNumber(number);
+  }
+
+  return result;
 }
 
 string NumberNamesSpeller::getNumberName(unsigned number) {
