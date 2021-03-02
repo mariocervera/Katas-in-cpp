@@ -31,16 +31,30 @@ static string handle2DigitNumber(unsigned number) {
 }
 
 static string handle3DigitNumber(unsigned number) {
+  if (number < 100)
+    return handle2DigitNumber(number);
+
   string result = units[number / 100] + " hundred";
   if (number % 100 != 0)
     result += " and " + handle2DigitNumber(number % 100);
+
   return result;
 }
 
 static string handle4DigitNumber(unsigned number) {
   string result = units[number / 1000] + " thousand";
-  if (number % 1000 != 0)
-    result += ", " + handle3DigitNumber(number % 1000);
+
+  number %= 1000;
+  
+  if (number != 0) {
+    if (number > 99)
+      result += ", ";
+    else
+      result += " and ";
+    
+    result += handle3DigitNumber(number);
+  }
+
   return result;
 }
 

@@ -79,6 +79,16 @@ TEST_F(NumberNamesSpellerFixture, fourDigitsEndingAllZeros_shouldReturnNamedNumb
 
 TEST_F(NumberNamesSpellerFixture, fourDigitsWithoutIntermediateZeros_shouldReturnNamedNumber) {
   assertNumberName(1111, "one thousand, one hundred and eleven");
+  assertNumberName(2412, "two thousand, four hundred and twelve");
+  assertNumberName(6178, "six thousand, one hundred and seventy eight");
+}
+
+TEST_F(NumberNamesSpellerFixture, fourDigitsWithIntermediateZeros_shouldReturnNamedNumber) {
+  assertNumberName(1101, "one thousand, one hundred and one");
+  assertNumberName(1011, "one thousand and eleven");
+  assertNumberName(2002, "two thousand and two");
+  assertNumberName(3056, "three thousand and fifty six");
+  assertNumberName(9449, "nine thousand, four hundred and forty nine");
 }
 
 
