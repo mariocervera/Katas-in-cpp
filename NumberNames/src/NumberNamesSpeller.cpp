@@ -63,6 +63,16 @@ static string handle5DigitNumber(unsigned number) {
   return result;
 }
 
+static string handle6DigitNumber(unsigned number) {
+  string result = handle3DigitNumber(number / 1000) + " thousand";
+
+  number %= 1000;
+  if (number != 0)
+    result += separator(number) + handle3DigitNumber(number);
+
+  return result;
+}
+
 string NumberNamesSpeller::getNumberName(unsigned number) {
   if (number < 10)
     return handle1DigitNumber(number);
@@ -72,6 +82,8 @@ string NumberNamesSpeller::getNumberName(unsigned number) {
     return handle3DigitNumber(number);
   if(number < 10000)
     return handle4DigitNumber(number);
+  if (number < 100000)
+    return handle5DigitNumber(number);
 
-  return handle5DigitNumber(number);
+  return handle6DigitNumber(number);
 }

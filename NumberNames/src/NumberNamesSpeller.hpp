@@ -3,6 +3,7 @@
 using namespace std;
 
 class NumberNamesSpeller {
-public: 
+public:
+  // Spells out the given number (up to 6 digits).
   string getNumberName(unsigned number);
 };

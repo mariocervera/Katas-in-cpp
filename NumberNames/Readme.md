@@ -15,8 +15,6 @@ Write a program that spells out numbers. For example:
 
 512607 : five hundred and twelve thousand, six hundred and seven
 
-43112603 : forty three million, one hundred and twelve thousand, six hundred and three
-
 ---
 
 Source http://rosettacode.org
