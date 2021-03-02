@@ -63,10 +63,12 @@ static string handleThousandNumber(unsigned number) {
 string NumberNamesSpeller::getNumberName(unsigned number) {
   if (number < 10)
     return handleUnitNumber(number);
-  if(number < 100)
+  if (number < 100)
     return handle2DigitNumber(number);
   if (number < 1000)
     return handle3DigitNumber(number);
+  if (number < 1000000)
+    return handleThousandNumber(number);
 
-  return handleThousandNumber(number);
+  return "Error";
 }

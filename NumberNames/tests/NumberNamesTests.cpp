@@ -113,3 +113,9 @@ TEST_F(NumberNamesSpellerFixture, sixDigits_shouldReturnNumberName) {
   assertNumberName(500007, "five hundred thousand and seven");
   assertNumberName(601109, "six hundred and one thousand, one hundred and nine");
 }
+
+TEST_F(NumberNamesSpellerFixture, MoreThanSixDigits_shouldReturnError) {
+  assertNumberName(1234567, "Error");
+  assertNumberName(12345678, "Error");
+  assertNumberName(123456789, "Error");
+}
