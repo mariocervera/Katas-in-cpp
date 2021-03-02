@@ -58,3 +58,9 @@ TEST_F(NumberNamesSpellerFixture, threeDigitsEndingAllZeros_shouldReturnNamedNum
   assertNumberName(400, "four hundred");
   assertNumberName(700, "seven hundred");
 }
+
+TEST_F(NumberNamesSpellerFixture, threeDigits_shouldReturnNamedNumber) {
+  assertNumberName(111, "one hundred and eleven");
+  assertNumberName(554, "five hundred and fifty four");
+  assertNumberName(833, "eight hundred and thirty three");
+}

@@ -28,7 +28,10 @@ static string handle2DigitNumber(unsigned number) {
 }
 
 static string handle3DigitNumber(unsigned number) {
-  return units[number / 100] + " hundred";
+  string result = units[number / 100] + " hundred";
+  if (number % 100 != 0)
+    result += " and " + handle2DigitNumber(number % 100);
+  return result;
 }
 
 string NumberNamesSpeller::getNumberName(unsigned number) {
