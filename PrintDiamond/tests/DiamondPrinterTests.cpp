@@ -41,3 +41,13 @@ C   C
  B B 
   A  )");
 }
+
+TEST_F(DiamondPrinterFixture, D_shouldReturnCorrectDiamond) {
+  assertDiamond('D', R"(   A   
+  B B  
+ C   C 
+D     D
+ C   C 
+  B B  
+   A   )");
+}
