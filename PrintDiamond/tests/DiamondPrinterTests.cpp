@@ -31,7 +31,8 @@ TEST_F(DiamondPrinterFixture, A_shouldReturnCorrectDiamond) {
 TEST_F(DiamondPrinterFixture, B_shouldReturnCorrectDiamond) {
   assertDiamond('B', R"( A 
 B B
- A )");
+ A 
+)");
 }
 
 TEST_F(DiamondPrinterFixture, C_shouldReturnCorrectDiamond) {
@@ -39,7 +40,8 @@ TEST_F(DiamondPrinterFixture, C_shouldReturnCorrectDiamond) {
  B B 
 C   C
  B B 
-  A  )");
+  A  
+)");
 }
 
 TEST_F(DiamondPrinterFixture, D_shouldReturnCorrectDiamond) {
@@ -49,7 +51,8 @@ TEST_F(DiamondPrinterFixture, D_shouldReturnCorrectDiamond) {
 D     D
  C   C 
   B B  
-   A   )");
+   A   
+)");
 }
 
 TEST_F(DiamondPrinterFixture, Z_shouldReturnCorrectDiamond) {
@@ -71,7 +74,8 @@ J                 J
       D     D      
        C   C       
         B B        
-         A         )");
+         A         
+)");
 }
 
 TEST_F(DiamondPrinterFixture, NonCapitalLetter_shouldReturnError) {

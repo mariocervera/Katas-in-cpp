@@ -16,24 +16,25 @@ static string spaces(unsigned numSpaces) {
 }
 
 static string getRow_A(unsigned n) {
-  return spaces(n) + letters[0] + spaces(n);
+  string row = spaces(n) + letters[0] + spaces(n);
+  return (n == 0) ? row : row + "\n";
 }
 
 static string getIntermediateRow(unsigned n, unsigned row) {
-  return spaces(n-row) + letters[row] + spaces(row*2 - 1) +
-    letters[row] + spaces(n-row) + "\n";
+  return spaces(n-row) + letters[row] + spaces(row*2 - 1) + letters[row] + spaces(n-row) + "\n";
 }
 
 static string doGetDiamond(unsigned n) {
-  string diamond = getRow_A(n) + "\n";
+  string diamond = getRow_A(n);
   
-  for (unsigned i = 1; i <= n; ++i)
+  for (int i = 1; i <= n; ++i)
     diamond += getIntermediateRow(n, i);
   
-  for(unsigned i = n-1; i > 0; --i)
+  for(int i = n-1; i > 0; --i)
     diamond += getIntermediateRow(n, i);
   
-  diamond += getRow_A(n);
+  if(n > 0)
+    diamond += getRow_A(n);
 
   return diamond;
 }
@@ -41,10 +42,8 @@ static string doGetDiamond(unsigned n) {
 string DiamondPrinter::getDiamond(char letter) {
   if(!isCapitalLetter(letter))
     return "Error";
-
-  if(letter == 'A')
-    return "A";
-
+  
   const unsigned numLettersInDiamond = letter - 'A';
+  
   return doGetDiamond(numLettersInDiamond);
 }
