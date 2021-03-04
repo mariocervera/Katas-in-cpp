@@ -78,7 +78,7 @@ J                 J
 )");
 }
 
-TEST_F(DiamondPrinterFixture, NonCapitalLetter_shouldReturnError) {
+TEST_F(DiamondPrinterFixture, NotCapitalLetter_shouldReturnError) {
   assertDiamond('a', "Error");
   assertDiamond('&', "Error");
   assertDiamond('1', "Error");
