@@ -1,7 +1,7 @@
 #include "DiamondPrinter.hpp"
 
-static char letters[26] = {'A','B','C','D','E','F','G','H','I','J', 'K','L','M','N',
-                           'O','P', 'Q','R','S','T','U','V','W','X','Y','Z' };
+static char letters[26] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N',
+                           'O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 
 static string spaces(unsigned numSpaces) {
   string result = "";
@@ -10,21 +10,33 @@ static string spaces(unsigned numSpaces) {
   return result;
 }
 
+static string getRow_A(unsigned n) {
+  return spaces(n) + letters[0] + spaces(n);
+}
+
+static string getIntermediateRow(unsigned n, unsigned row) {
+  return spaces(n-row) + letters[row] + spaces(row*2 - 1) +
+    letters[row] + spaces(n-row) + "\n";
+}
+
+static string doGetDiamond(unsigned n) {
+  string diamond = getRow_A(n) + "\n";
+  
+  for (unsigned i = 1; i <= n; ++i)
+    diamond += getIntermediateRow(n, i);
+  
+  for(unsigned i = n-1; i > 0; --i)
+    diamond += getIntermediateRow(n, i);
+  
+  diamond += getRow_A(n);
+
+  return diamond;
+}
+
 string DiamondPrinter::getDiamond(char letter) {
   if (letter == 'A')
     return "A";
 
-  unsigned n = letter - 'A';
-  
-  string diamond = spaces(n) + letters[0] + spaces(n) + "\n";
-  
-  for (unsigned i = 1; i <= n; ++i)
-    diamond += spaces(n-i) + letters[i] + spaces(i*2 - 1) + letters[i] + spaces(n-i) + "\n";
-
-  for(unsigned i = n-1; i > 0; --i)
-    diamond += spaces(n-i) + letters[i] + spaces(i*2 - 1) + letters[i] + spaces(n-i) + "\n";
-
-  diamond += spaces(n) + letters[0] + spaces(n);
-
-  return diamond;
+  const unsigned numLettersInDiamond = letter - 'A';
+  return doGetDiamond(numLettersInDiamond);
 }
