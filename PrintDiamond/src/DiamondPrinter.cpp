@@ -3,6 +3,11 @@
 static char letters[26] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N',
                            'O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 
+static bool isCapitalLetter(const char letter) {
+  int letterCode = letter - 'A';
+  return (0 <= letterCode && letterCode < 26);
+}
+
 static string spaces(unsigned numSpaces) {
   string result = "";
   for (int i = 0; i < numSpaces; ++i)
@@ -34,7 +39,10 @@ static string doGetDiamond(unsigned n) {
 }
 
 string DiamondPrinter::getDiamond(char letter) {
-  if (letter == 'A')
+  if(!isCapitalLetter(letter))
+    return "Error";
+
+  if(letter == 'A')
     return "A";
 
   const unsigned numLettersInDiamond = letter - 'A';

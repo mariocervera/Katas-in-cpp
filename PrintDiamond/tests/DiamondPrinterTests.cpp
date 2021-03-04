@@ -23,7 +23,7 @@ protected:
 
 ///
 /// Tests
-/// 
+///
 TEST_F(DiamondPrinterFixture, A_shouldReturnCorrectDiamond) {
   assertDiamond('A', "A");
 }
@@ -50,4 +50,32 @@ D     D
  C   C 
   B B  
    A   )");
+}
+
+TEST_F(DiamondPrinterFixture, Z_shouldReturnCorrectDiamond) {
+  assertDiamond('J', R"(         A         
+        B B        
+       C   C       
+      D     D      
+     E       E     
+    F         F    
+   G           G   
+  H             H  
+ I               I 
+J                 J
+ I               I 
+  H             H  
+   G           G   
+    F         F    
+     E       E     
+      D     D      
+       C   C       
+        B B        
+         A         )");
+}
+
+TEST_F(DiamondPrinterFixture, NonCapitalLetter_shouldReturnError) {
+  assertDiamond('a', "Error");
+  assertDiamond('&', "Error");
+  assertDiamond('1', "Error");
 }
