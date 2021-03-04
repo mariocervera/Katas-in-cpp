@@ -14,16 +14,16 @@ string DiamondPrinter::getDiamond(char letter) {
 		return "A";
 
 	unsigned n = letter - 'A';
+	
 	string diamond = spaces(n) + letters[0] + spaces(n) + "\n";
-	for (unsigned i = 1; i <= n; ++i) {
-		diamond += spaces(n-i) + letters[i] + spaces(i*2-1) + letters[i] + spaces(n-i) + "\n";
-	}
+	
+	for (unsigned i = 1; i <= n; ++i)
+		diamond += spaces(n-i) + letters[i] + spaces(i*2 - 1) + letters[i] + spaces(n-i) + "\n";
+
+	for(unsigned i = n-1; i > 0; --i)
+		diamond += spaces(n-i) + letters[i] + spaces(i*2 - 1) + letters[i] + spaces(n-i) + "\n";
 
 	diamond += spaces(n) + letters[0] + spaces(n);
-
-	//for (unsigned i = 0; i < n; ++i) {
-	//	diamond += spaces(n) + letters[i] + spaces(n);
-	//}
 
 	return diamond;
 }

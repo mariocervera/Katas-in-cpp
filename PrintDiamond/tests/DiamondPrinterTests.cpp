@@ -33,3 +33,11 @@ TEST_F(DiamondPrinterFixture, B_shouldReturnCorrectDiamond) {
 B B
  A )");
 }
+
+TEST_F(DiamondPrinterFixture, C_shouldReturnCorrectDiamond) {
+  assertDiamond('C', R"(  A  
+ B B 
+C   C
+ B B 
+  A  )");
+}
