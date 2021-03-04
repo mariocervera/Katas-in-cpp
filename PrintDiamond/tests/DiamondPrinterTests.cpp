@@ -27,3 +27,9 @@ protected:
 TEST_F(DiamondPrinterFixture, A_shouldReturnCorrectDiamond) {
   assertDiamond('A', "A");
 }
+
+TEST_F(DiamondPrinterFixture, B_shouldReturnCorrectDiamond) {
+  assertDiamond('B', R"( A 
+B B
+ A )");
+}
