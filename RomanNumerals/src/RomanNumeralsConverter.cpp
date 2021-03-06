@@ -1,72 +1,43 @@
 #include "RomanNumeralsConverter.hpp"
 
-enum class Context {
-  Units = 1,
-  Tens,
-  Hundreds,
-  Thousands
-};
+static string unit[] = {"I", "X", "C", "M"};
+static string fifth[] = {"V", "L", "D"};
+static string tenth[] = {"X", "C", "M"};
 
-static string unit(Context context) {
-  if (context == Context::Units)
-    return "I";
-  else if (context == Context::Tens)
-    return "X";
-  else if (context == Context::Hundreds)
-    return "C";
-  return "M";
-}
-
-static string fifth(Context context) {
-  if (context == Context::Units)
-    return "V";
-  else if (context == Context::Tens)
-    return "L";
-  return "D";
-}
-
-static string tenth(Context context) {
-  if (context == Context::Units)
-    return "X";
-  else if (context == Context::Tens)
-    return "C";
-  return "M";
-}
-
-static string getRomanNumeralForDigit(unsigned digit, Context context) {
-  string romanNumeral = "";
+static string getRomanNumeralForDigit(unsigned digit, unsigned digitPosition) {
+  string digitInRoman = "";
 
   if (digit <= 3)
     for (unsigned i = 1; i <= digit; ++i)
-      romanNumeral += unit(context);
+      digitInRoman += unit[digitPosition];
 
   if (digit == 4 || digit == 9)
-    romanNumeral += unit(context);
+    digitInRoman += unit[digitPosition];
 
   if (4 <= digit && digit <= 8)
-    romanNumeral += fifth(context);
+    digitInRoman += fifth[digitPosition];
 
   if(6 <= digit && digit <= 8)
     for (unsigned i = 6; i <= digit; ++i)
-      romanNumeral += unit(context);
+      digitInRoman += unit[digitPosition];
 
   if (9 == digit)
-    romanNumeral += tenth(context);
+    digitInRoman += tenth[digitPosition];
 
-  return romanNumeral;
+  return digitInRoman;
 }
 
 string RomanNumeralsConverter::getRomanNumeral(unsigned number) {
-
-  string romanNumberal = "";
-  unsigned context = 4;
-
-  for (int i = 1000; i > 0; i /= 10) {
-    unsigned nextDigit = number / i;
-    if(nextDigit != 0)
-      romanNumberal += getRomanNumeralForDigit(nextDigit, static_cast<Context>(context));
-    number %= i;
-    --context;
+  string romanNumeral = "";
+  
+  unsigned digitPosition = 3;
+  for (int magnitude = 1000; magnitude > 0; magnitude /= 10) {
+    unsigned digit = number/magnitude;
+    if(digit != 0)
+      romanNumeral += getRomanNumeralForDigit(digit, digitPosition);
+    number %= magnitude;
+    --digitPosition;
   }
-  return romanNumberal;
+
+  return romanNumeral;
 }
