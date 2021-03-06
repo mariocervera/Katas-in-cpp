@@ -1,36 +1,53 @@
 #include "RomanNumeralsConverter.hpp"
 
-static string unit() {
-  return "I";
-}
+enum class Context {
+  Units = 1,
+  Tens,
+  Hundreds,
+  Thousands
+};
 
-static string fifth() {
-  return "V";
-}
-
-static string tenth() {
+static string unit(Context context) {
+  if(context == Context::Units)
+    return "I";
   return "X";
 }
 
-string RomanNumeralsConverter::getRomanNumeral(unsigned number) {
+static string fifth(Context context) {
+  if (context == Context::Units)
+    return "V";
+  return "L";
+}
+
+static string tenth(Context context) {
+  if (context == Context::Units)
+    return "X";
+  return "C";
+}
+
+static string getRomanNumeralForDigit(unsigned digit, Context context) {
   string romanNumeral = "";
 
-  if (number <= 3)
-    for (unsigned i = 1; i <= number; ++i)
-      romanNumeral += unit();
+  if (digit <= 3)
+    for (unsigned i = 1; i <= digit; ++i)
+      romanNumeral += unit(context);
 
-  if (number == 4 || number == 9)
-    romanNumeral += unit();
+  if (digit == 4 || digit == 9)
+    romanNumeral += unit(context);
 
-  if (4 <= number && number <= 8)
-    romanNumeral += fifth();
+  if (4 <= digit && digit <= 8)
+    romanNumeral += fifth(context);
 
-  if(6 <= number && number <= 8)
-    for (unsigned i = 6; i <= number; ++i)
-      romanNumeral += unit();
+  if(6 <= digit && digit <= 8)
+    for (unsigned i = 6; i <= digit; ++i)
+      romanNumeral += unit(context);
 
-  if (9 <= number)
-    romanNumeral += tenth();
+  if (9 == digit)
+    romanNumeral += tenth(context);
 
   return romanNumeral;
+}
+
+string RomanNumeralsConverter::getRomanNumeral(unsigned number) {
+  return getRomanNumeralForDigit(number, Context::Units);
 }

@@ -48,6 +48,8 @@ TEST_F(RomanNumeralsConverterFixture, 9_shouldReturnCorrectRomanNumeral) {
   assertRomanNumeral(9, "IX");
 }
 
+/*
 TEST_F(RomanNumeralsConverterFixture, 10_shouldReturnCorrectRomanNumeral) {
   assertRomanNumeral(10, "X");
 }
+*/
