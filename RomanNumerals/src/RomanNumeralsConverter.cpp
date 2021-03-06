@@ -1,33 +1,44 @@
 #include "RomanNumeralsConverter.hpp"
+#include <math.h>
 
 static string unit[] = {"I", "X", "C", "M"};
 static string fifth[] = {"V", "L", "D"};
 static string tenth[] = {"X", "C", "M"};
 
-static string getRomanNumeralFor(unsigned digit, unsigned position) {
-  string digitInRoman = "";
+static string getNUnits(unsigned n, unsigned position) {
+  string units = "";
+  for (int i = 0; i < n; ++i)
+    units += unit[position];
+  return units;
+}
 
-  if (digit == 0)
-    return digitInRoman;
+static string getRomanNumeralForDigitAtPosition(unsigned digit, unsigned position) {
+  string roman = "";
 
   if (digit <= 3)
-    for (unsigned i = 1; i <= digit; ++i)
-      digitInRoman += unit[position];
+    roman += getNUnits(digit, position);
 
   if (digit == 4)
-    digitInRoman += unit[position];
+    roman += unit[position];
 
   if (4 <= digit && digit <= 8)
-    digitInRoman += fifth[position];
+    roman += fifth[position];
 
-  if(6 <= digit && digit <= 8)
-    for (unsigned i = 6; i <= digit; ++i)
-      digitInRoman += unit[position];
+  if (6 <= digit && digit <= 8)
+    roman += getNUnits(digit - 5, position);
 
   if (digit == 9)
-    digitInRoman += (unit[position] + tenth[position]);
+    roman += (unit[position] + tenth[position]);
 
-  return digitInRoman;
+  return roman;
+}
+
+static string getRomanNumeralForDigit(unsigned digit, unsigned magnitude) {
+  if (digit == 0)
+    return "";
+
+  unsigned position = log10(magnitude);
+  return getRomanNumeralForDigitAtPosition(digit, position);
 }
 
 string RomanNumeralsConverter::getRomanNumeral(unsigned number) {
@@ -35,10 +46,9 @@ string RomanNumeralsConverter::getRomanNumeral(unsigned number) {
     return "Error";
 
   string romanNumeral = "";
-
-  for (unsigned magnitude = 1000, position = 3; magnitude > 0; magnitude /= 10, --position) {
+  for (unsigned magnitude = 1000; magnitude > 0; magnitude /= 10) {
     unsigned digit = number/magnitude;
-    romanNumeral += getRomanNumeralFor(digit, position);
+    romanNumeral += getRomanNumeralForDigit(digit, magnitude);
     number %= magnitude;
   }
 
