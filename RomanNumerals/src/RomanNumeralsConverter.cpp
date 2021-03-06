@@ -4,25 +4,28 @@ static string unit[] = {"I", "X", "C", "M"};
 static string fifth[] = {"V", "L", "D"};
 static string tenth[] = {"X", "C", "M"};
 
-static string getRomanNumeralForDigit(unsigned digit, unsigned digitPosition) {
+static string getRomanNumeralFor(unsigned digit, unsigned position) {
   string digitInRoman = "";
+
+  if (digit == 0)
+    return digitInRoman;
 
   if (digit <= 3)
     for (unsigned i = 1; i <= digit; ++i)
-      digitInRoman += unit[digitPosition];
+      digitInRoman += unit[position];
 
   if (digit == 4 || digit == 9)
-    digitInRoman += unit[digitPosition];
+    digitInRoman += unit[position];
 
   if (4 <= digit && digit <= 8)
-    digitInRoman += fifth[digitPosition];
+    digitInRoman += fifth[position];
 
   if(6 <= digit && digit <= 8)
     for (unsigned i = 6; i <= digit; ++i)
-      digitInRoman += unit[digitPosition];
+      digitInRoman += unit[position];
 
   if (9 == digit)
-    digitInRoman += tenth[digitPosition];
+    digitInRoman += tenth[position];
 
   return digitInRoman;
 }
@@ -32,14 +35,11 @@ string RomanNumeralsConverter::getRomanNumeral(unsigned number) {
     return "Error";
 
   string romanNumeral = "";
-  
-  unsigned digitPosition = 3;
-  for (int magnitude = 1000; magnitude > 0; magnitude /= 10) {
+
+  for (unsigned magnitude = 1000, position = 3; magnitude > 0; magnitude /= 10, --position) {
     unsigned digit = number/magnitude;
-    if(digit != 0)
-      romanNumeral += getRomanNumeralForDigit(digit, digitPosition);
+    romanNumeral += getRomanNumeralFor(digit, position);
     number %= magnitude;
-    --digitPosition;
   }
 
   return romanNumeral;
