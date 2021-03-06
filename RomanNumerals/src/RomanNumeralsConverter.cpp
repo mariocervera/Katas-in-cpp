@@ -8,21 +8,29 @@ enum class Context {
 };
 
 static string unit(Context context) {
-  if(context == Context::Units)
+  if (context == Context::Units)
     return "I";
-  return "X";
+  else if (context == Context::Tens)
+    return "X";
+  else if (context == Context::Hundreds)
+    return "C";
+  return "M";
 }
 
 static string fifth(Context context) {
   if (context == Context::Units)
     return "V";
-  return "L";
+  else if (context == Context::Tens)
+    return "L";
+  return "D";
 }
 
 static string tenth(Context context) {
   if (context == Context::Units)
     return "X";
-  return "C";
+  else if (context == Context::Tens)
+    return "C";
+  return "M";
 }
 
 static string getRomanNumeralForDigit(unsigned digit, Context context) {

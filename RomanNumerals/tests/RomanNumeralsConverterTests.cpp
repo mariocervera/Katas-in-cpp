@@ -81,3 +81,94 @@ TEST_F(RomanNumeralsConverterFixture, 20_shouldReturnCorrectRomanNumeral) {
   assertRomanNumeral(20, "XX");
 }
 
+TEST_F(RomanNumeralsConverterFixture, 25_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(25, "XXV");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 34_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(34, "XXXIV");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 47_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(47, "XLVII");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 53_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(53, "LIII");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 59_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(59, "LIX");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 70_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(70, "LXX");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 81_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(81, "LXXXI");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 87_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(87, "LXXXVII");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 92_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(92, "XCII");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 99_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(99, "XCIX");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 100_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(100, "C");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 105_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(105, "CV");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 147_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(147, "CXLVII");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 502_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(502, "DII");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 633_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(633, "DCXXXIII");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 870_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(870, "DCCCLXX");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 988_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(988, "CMLXXXVIII");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 1234_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(1234, "MCCXXXIV");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 1990_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(1990, "MCMXC");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 2008_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(2008, "MMVIII");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 2500_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(2500, "MMD");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 2601_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(2601, "MMDCI");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 3000_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(3000, "MMM");
+}
