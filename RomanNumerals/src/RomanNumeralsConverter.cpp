@@ -14,7 +14,7 @@ static string getRomanNumeralFor(unsigned digit, unsigned position) {
     for (unsigned i = 1; i <= digit; ++i)
       digitInRoman += unit[position];
 
-  if (digit == 4 || digit == 9)
+  if (digit == 4)
     digitInRoman += unit[position];
 
   if (4 <= digit && digit <= 8)
@@ -24,8 +24,8 @@ static string getRomanNumeralFor(unsigned digit, unsigned position) {
     for (unsigned i = 6; i <= digit; ++i)
       digitInRoman += unit[position];
 
-  if (9 == digit)
-    digitInRoman += tenth[position];
+  if (digit == 9)
+    digitInRoman += (unit[position] + tenth[position]);
 
   return digitInRoman;
 }
