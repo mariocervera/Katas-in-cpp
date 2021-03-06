@@ -38,7 +38,7 @@ TEST_F(RomanNumeralsConverterFixture, 5_shouldReturnCorrectRomanNumeral) {
   assertRomanNumeral(5, "V");
 }
 
-TEST_F(RomanNumeralsConverterFixture, 6_shouldReturnCorrectRomanNumeral) {
+TEST_F(RomanNumeralsConverterFixture, 6_7_8_shouldReturnCorrectRomanNumeral) {
   assertRomanNumeral(6, "VI");
   assertRomanNumeral(7, "VII");
   assertRomanNumeral(8, "VIII");
@@ -48,8 +48,36 @@ TEST_F(RomanNumeralsConverterFixture, 9_shouldReturnCorrectRomanNumeral) {
   assertRomanNumeral(9, "IX");
 }
 
-/*
+
 TEST_F(RomanNumeralsConverterFixture, 10_shouldReturnCorrectRomanNumeral) {
   assertRomanNumeral(10, "X");
 }
-*/
+
+TEST_F(RomanNumeralsConverterFixture, 11_12_13_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(11, "XI");
+  assertRomanNumeral(12, "XII");
+  assertRomanNumeral(13, "XIII");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 14_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(14, "XIV");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 15_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(15, "XV");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 16_17_18_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(16, "XVI");
+  assertRomanNumeral(17, "XVII");
+  assertRomanNumeral(18, "XVIII");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 19_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(19, "XIX");
+}
+
+TEST_F(RomanNumeralsConverterFixture, 20_shouldReturnCorrectRomanNumeral) {
+  assertRomanNumeral(20, "XX");
+}
+

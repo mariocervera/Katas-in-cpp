@@ -49,5 +49,16 @@ static string getRomanNumeralForDigit(unsigned digit, Context context) {
 }
 
 string RomanNumeralsConverter::getRomanNumeral(unsigned number) {
-  return getRomanNumeralForDigit(number, Context::Units);
+
+  string romanNumberal = "";
+  unsigned context = 4;
+
+  for (int i = 1000; i > 0; i /= 10) {
+    unsigned nextDigit = number / i;
+    if(nextDigit != 0)
+      romanNumberal += getRomanNumeralForDigit(nextDigit, static_cast<Context>(context));
+    number %= i;
+    --context;
+  }
+  return romanNumberal;
 }
