@@ -28,6 +28,9 @@ static string getRomanNumeralForDigit(unsigned digit, unsigned digitPosition) {
 }
 
 string RomanNumeralsConverter::getRomanNumeral(unsigned number) {
+  if (number > 3000)
+    return "Error";
+
   string romanNumeral = "";
   
   unsigned digitPosition = 3;

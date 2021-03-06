@@ -172,3 +172,9 @@ TEST_F(RomanNumeralsConverterFixture, 2601_shouldReturnCorrectRomanNumeral) {
 TEST_F(RomanNumeralsConverterFixture, 3000_shouldReturnCorrectRomanNumeral) {
   assertRomanNumeral(3000, "MMM");
 }
+
+TEST_F(RomanNumeralsConverterFixture, HigherThan3000_shouldReturnError) {
+  assertRomanNumeral(3001, "Error");
+  assertRomanNumeral(12345, "Error");
+  assertRomanNumeral(543210, "Error");
+}
