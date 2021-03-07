@@ -1,28 +1,29 @@
 #include "pch.h"
 #include "TennisMatch.h"
 
+static const string PLAYER_1 = "Player 1";
+static const string PLAYER_2 = "Player 2";
+
 static unique_ptr<TennisMatch> createMatchWithPlayers(const string& player1, const string& player2) {
   return make_unique<TennisMatch>(player1, player2);
 }
 
 static unique_ptr<TennisMatch> createMatch() {
-  return createMatchWithPlayers("DummyPlayer1", "DummyPlayer2");
+  return createMatchWithPlayers("Dummy Player 1", "Dummy Player 2");
 }
 
 static unique_ptr<TennisMatch> createMatchWithPlayer(const string& player) {
-  return createMatchWithPlayers(player, "DummyPlayer");
+  return createMatchWithPlayers(player, "Dummy Player");
 }
 
 //
 // Parameterized tests.
 //
 static void test_scorePointsReturnsCorrectResult(unsigned score1, unsigned score2, const string &result) {
-  string player1 = "Player 1";
-  string player2 = "Player 2";
-  auto tennisMatch = createMatchWithPlayers(player1, player2);
+  auto tennisMatch = createMatchWithPlayers(PLAYER_1, PLAYER_2);
 
-  tennisMatch->score(player1, score1);
-  tennisMatch->score(player2, score2);
+  tennisMatch->score(PLAYER_1, score1);
+  tennisMatch->score(PLAYER_2, score2);
 
   ASSERT_EQ(tennisMatch->getResult(), result);
 }
@@ -67,4 +68,11 @@ TEST(TennisMatch, canScoreDeuce) {
   test_scorePointsReturnsCorrectResult(5, 5, "Deuce");
   test_scorePointsReturnsCorrectResult(6, 6, "Deuce");
   test_scorePointsReturnsCorrectResult(20, 20, "Deuce");
+}
+
+TEST(TennisMatch, canScoreAdvantage) {
+  test_scorePointsReturnsCorrectResult(4, 3, "Advantage " + PLAYER_1);
+  test_scorePointsReturnsCorrectResult(6, 5, "Advantage " + PLAYER_1);
+  test_scorePointsReturnsCorrectResult(3, 4, "Advantage " + PLAYER_2);
+  test_scorePointsReturnsCorrectResult(8, 9, "Advantage " + PLAYER_2);
 }
