@@ -4,11 +4,11 @@
 static const string PLAYER_1 = "Player 1";
 static const string PLAYER_2 = "Player 2";
 
-static unique_ptr<TennisMatch> createMatchWithPlayers(const string& player1, const string& player2) {
+static unique_ptr<TennisMatch> createMatchWithPlayers(const string &player1, const string &player2) {
   return make_unique<TennisMatch>(player1, player2);
 }
 
-static unique_ptr<TennisMatch> createMatchWithPlayer(const string& player) {
+static unique_ptr<TennisMatch> createMatchWithPlayer(const string &player) {
   return createMatchWithPlayers(player, "Dummy Player");
 }
 
@@ -19,13 +19,13 @@ static unique_ptr<TennisMatch> createMatch() {
 //
 // Parameterized test.
 //
-static void test_scoreReturnsCorrectResult(unsigned score1, unsigned score2, const string &result) {
+static void test_scoreReturnsCorrectResult(unsigned scoreP1, unsigned scoreP2, const string &expectedResult) {
   auto tennisMatch = createMatchWithPlayers(PLAYER_1, PLAYER_2);
 
-  tennisMatch->score(PLAYER_1, score1);
-  tennisMatch->score(PLAYER_2, score2);
+  tennisMatch->score(PLAYER_1, scoreP1);
+  tennisMatch->score(PLAYER_2, scoreP2);
 
-  ASSERT_EQ(tennisMatch->getResult(), result);
+  ASSERT_EQ(tennisMatch->getResult(), expectedResult);
 }
 
 //
