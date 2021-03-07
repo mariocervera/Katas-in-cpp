@@ -53,7 +53,7 @@ TEST(TennisMatch, getResultWithoutScoring_shouldReturnLove) {
   ASSERT_EQ(tennisMatch->getMatchResult(), "Love - Love");
 }
 
-TEST(TennisMatch, scoreBasicPoints_shouldReturnCorrectResult) {
+TEST(TennisMatch, scoreRawPoints_shouldReturnCorrectResult) {
   test_scoreReturnsCorrectResult(1, 0, "Fifteen - Love");
   test_scoreReturnsCorrectResult(2, 0, "Thirty - Love");
   test_scoreReturnsCorrectResult(3, 2, "Forty - Thirty");

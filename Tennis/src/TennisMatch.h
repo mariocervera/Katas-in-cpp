@@ -2,6 +2,8 @@
 
 using namespace std;
 
+static string rawScores[4] = { "Love", "Fifteen", "Thirty", "Forty" };
+
 class TennisMatch {
 
 public:
@@ -25,8 +27,8 @@ public:
     if (isIncorrectResult())
       return "Incorrect score";
 
-    if (isBasicResult())
-      return getBasicResult();
+    if (isRawResult())
+      return getRawResult();
     
     return getNonBasicResult();
   }
@@ -45,12 +47,16 @@ private:
 
     return false;
   }
-  bool isBasicResult() {
-    return (scorePlayer1 < 3 || scorePlayer2 < 3) && scorePlayer1 < 4 && scorePlayer2 < 4;
+
+  bool isRawResult() {
+    bool bothPlayersFortyOrLess = scorePlayer1 < 4 && scorePlayer2 < 4;
+    bool atLeastOnePlayerIsNotForty = scorePlayer1 < 3 || scorePlayer2 < 3;
+    
+    return bothPlayersFortyOrLess && atLeastOnePlayerIsNotForty;
   }
 
-  string getBasicResult() {
-    return translate(scorePlayer1) + " - " + translate(scorePlayer2);
+  string getRawResult() {
+    return rawScores[scorePlayer1] + " - " + rawScores[scorePlayer2];
   }
 
   string getNonBasicResult() {
@@ -73,17 +79,6 @@ private:
       return "Deuce";
 
     return "";
-  }
-
-  string translate(unsigned score) {
-    if (score == 0)
-      return "Love";
-    if (score == 1)
-      return "Fifteen";
-    else if (score == 2)
-      return "Thirty";
-    else
-      return "Forty";
   }
 
 private:
