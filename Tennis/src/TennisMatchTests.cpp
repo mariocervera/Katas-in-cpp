@@ -25,6 +25,20 @@ static void test_scorePointsForOnePlayer(unsigned points, const string &result) 
   ASSERT_EQ(tennisMatch->getScore(player1), result);
 }
 
+static void test_scorePointsForTwoPlayers(unsigned score1, unsigned score2,
+    const string &result1, const string &result2) {
+  
+  string player1 = "Player 1";
+  string player2 = "Player 2";
+  auto tennisMatch = createMatchWithPlayers(player1, player2);
+
+  tennisMatch->score(player1, score1);
+  tennisMatch->score(player2, score2);
+
+  ASSERT_EQ(tennisMatch->getScore(player1), result1);
+  ASSERT_EQ(tennisMatch->getScore(player2), result2);
+}
+
 //
 // Tests.
 //
@@ -51,21 +65,24 @@ TEST(TennisMatch, getScoreIncorrectPlayer_shouldFail) {
   ASSERT_EQ(tennisMatch->getScore("IncorrectPlayer"), "Error");
 }
 
-TEST(TennisMatch, canScorePointsForOnePlayer) {
+TEST(TennisMatch, canScoreBasicPointsForOnePlayer) {
   test_scorePointsForOnePlayer(1, "fifteen");
   test_scorePointsForOnePlayer(2, "thirty");
   test_scorePointsForOnePlayer(3, "forty");
 }
 
-TEST(TennisMatch, canScorePointsForDifferentPlayers) {
+TEST(TennisMatch, canGetLoveScore) {
   string player1 = "Player 1";
-  string player2 = "Player 2";
-  auto tennisMatch = createMatchWithPlayers(player1, player2);
+  auto tennisMatch = createMatchWithPlayer(player1);
 
-  tennisMatch->score(player1, 2);
-  tennisMatch->score(player2, 3);
+  ASSERT_EQ(tennisMatch->getScore(player1), "love");
+}
 
-  ASSERT_EQ(tennisMatch->getScore(player1), "thirty");
-  ASSERT_EQ(tennisMatch->getScore(player2), "forty");
+TEST(TennisMatch, canScorePointsForDifferentPlayers) {
+  test_scorePointsForTwoPlayers(2, 3, "thirty", "forty");
+}
+
+TEST(TennisMatch, canScoreDeuce) {
+  test_scorePointsForTwoPlayers(4, 4, "deuce", "deuce");
 }
 

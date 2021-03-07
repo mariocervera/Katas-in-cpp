@@ -22,6 +22,9 @@ public:
 	}
 
 	string getScore(const string& player) {
+		if (player1Score == 4 && player2Score == 4)
+			return "deuce";
+
 		if (player == player1) 
 			return translateScore(player1Score);
 		if (player == player2)
@@ -32,6 +35,8 @@ public:
 
 private:
 	string translateScore(unsigned score) {
+		if (score == 0)
+			return "love";
 		if (score == 1)
 			return "fifteen";
 		else if (score == 2)
