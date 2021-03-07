@@ -8,9 +8,10 @@ static string getNonBasicResultForPlayer(const string &player, unsigned playerSc
       return player + " wins";
     if (rivalScore == playerScore - 1)
       return "Advantage " + player;
-    if (rivalScore == playerScore)
-      return "Deuce";
   }
+
+  if (rivalScore == playerScore)
+    return "Deuce";
 
   return "";
 }
@@ -55,7 +56,7 @@ private:
     return false;
   }
   bool isBasicResult() {
-    return player1Score < 4 && player2Score < 4;
+    return (player1Score < 3 || player2Score < 3) && player1Score < 4 && player2Score < 4;
   }
 
   string getBasicResult() {

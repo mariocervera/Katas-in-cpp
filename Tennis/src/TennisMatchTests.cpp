@@ -8,18 +8,18 @@ static unique_ptr<TennisMatch> createMatchWithPlayers(const string& player1, con
   return make_unique<TennisMatch>(player1, player2);
 }
 
-static unique_ptr<TennisMatch> createMatch() {
-  return createMatchWithPlayers("Dummy Player 1", "Dummy Player 2");
-}
-
 static unique_ptr<TennisMatch> createMatchWithPlayer(const string& player) {
   return createMatchWithPlayers(player, "Dummy Player");
 }
 
+static unique_ptr<TennisMatch> createMatch() {
+  return createMatchWithPlayers("Dummy Player 1", "Dummy Player 2");
+}
+
 //
-// Parameterized tests.
+// Parameterized test.
 //
-static void test_scorePointsReturnsCorrectResult(unsigned score1, unsigned score2, const string &result) {
+static void test_scoreReturnsCorrectResult(unsigned score1, unsigned score2, const string &result) {
   auto tennisMatch = createMatchWithPlayers(PLAYER_1, PLAYER_2);
 
   tennisMatch->score(PLAYER_1, score1);
@@ -31,7 +31,7 @@ static void test_scorePointsReturnsCorrectResult(unsigned score1, unsigned score
 //
 // Tests.
 //
-TEST(TennisMatch, scorePointIncorrectPlayer_shouldFail) {
+TEST(TennisMatch, scorePointForIncorrectPlayer_shouldFail) {
   auto tennisMatch = createMatch();
 
   bool success = tennisMatch->score("Incorrect Player");
@@ -39,7 +39,7 @@ TEST(TennisMatch, scorePointIncorrectPlayer_shouldFail) {
   ASSERT_FALSE(success);
 }
 
-TEST(TennisMatch, scorePointCorrectPlayer_shouldSucceed) {
+TEST(TennisMatch, scorePointForCorrectPlayer_shouldSucceed) {
   auto tennisMatch = createMatchWithPlayer(PLAYER_1);
 
   bool success = tennisMatch->score(PLAYER_1);
@@ -53,40 +53,40 @@ TEST(TennisMatch, getResultWithoutScoring_shouldReturnLove) {
   ASSERT_EQ(tennisMatch->getResult(), "Love - Love");
 }
 
-TEST(TennisMatch, canScoreBasicPoints) {
-  test_scorePointsReturnsCorrectResult(1, 0, "Fifteen - Love");
-  test_scorePointsReturnsCorrectResult(2, 0, "Thirty - Love");
-  test_scorePointsReturnsCorrectResult(3, 0, "Forty - Love");
-  test_scorePointsReturnsCorrectResult(1, 1, "Fifteen - Fifteen");
-  test_scorePointsReturnsCorrectResult(1, 2, "Fifteen - Thirty");
-  test_scorePointsReturnsCorrectResult(0, 3, "Love - Forty");
+TEST(TennisMatch, scoreBasicPoints_shouldReturnCorrectResult) {
+  test_scoreReturnsCorrectResult(1, 0, "Fifteen - Love");
+  test_scoreReturnsCorrectResult(2, 0, "Thirty - Love");
+  test_scoreReturnsCorrectResult(3, 0, "Forty - Love");
+  test_scoreReturnsCorrectResult(1, 1, "Fifteen - Fifteen");
+  test_scoreReturnsCorrectResult(1, 2, "Fifteen - Thirty");
+  test_scoreReturnsCorrectResult(0, 3, "Love - Forty");
 }
 
-TEST(TennisMatch, canScoreDeuce) {
-  test_scorePointsReturnsCorrectResult(4, 4, "Deuce");
-  test_scorePointsReturnsCorrectResult(5, 5, "Deuce");
-  test_scorePointsReturnsCorrectResult(6, 6, "Deuce");
-  test_scorePointsReturnsCorrectResult(20, 20, "Deuce");
+TEST(TennisMatch, scoreDeuce_shouldReturnCorrectResult) {
+  test_scoreReturnsCorrectResult(3, 3, "Deuce");
+  test_scoreReturnsCorrectResult(4, 4, "Deuce");
+  test_scoreReturnsCorrectResult(5, 5, "Deuce");
+  test_scoreReturnsCorrectResult(20, 20, "Deuce");
 }
 
 TEST(TennisMatch, canScoreAdvantage) {
-  test_scorePointsReturnsCorrectResult(4, 3, "Advantage " + PLAYER_1);
-  test_scorePointsReturnsCorrectResult(6, 5, "Advantage " + PLAYER_1);
-  test_scorePointsReturnsCorrectResult(3, 4, "Advantage " + PLAYER_2);
-  test_scorePointsReturnsCorrectResult(8, 9, "Advantage " + PLAYER_2);
+  test_scoreReturnsCorrectResult(4, 3, "Advantage " + PLAYER_1);
+  test_scoreReturnsCorrectResult(6, 5, "Advantage " + PLAYER_1);
+  test_scoreReturnsCorrectResult(3, 4, "Advantage " + PLAYER_2);
+  test_scoreReturnsCorrectResult(8, 9, "Advantage " + PLAYER_2);
 }
 
 TEST(TennisMatch, getResultOfWinningGame_shouldReturnWinningPlayer) {
-  test_scorePointsReturnsCorrectResult(4, 2, PLAYER_1 + " wins");
-  test_scorePointsReturnsCorrectResult(6, 4, PLAYER_1 + " wins");
-  test_scorePointsReturnsCorrectResult(1, 4, PLAYER_2 + " wins");
-  test_scorePointsReturnsCorrectResult(5, 7, PLAYER_2 + " wins");
+  test_scoreReturnsCorrectResult(4, 2, PLAYER_1 + " wins");
+  test_scoreReturnsCorrectResult(6, 4, PLAYER_1 + " wins");
+  test_scoreReturnsCorrectResult(1, 4, PLAYER_2 + " wins");
+  test_scoreReturnsCorrectResult(5, 7, PLAYER_2 + " wins");
 }
 
 TEST(TennisMatch, getResultWithIncorrectScores_shouldReturnError) {
-  test_scorePointsReturnsCorrectResult(6, 2, "Incorrect score");
-  test_scorePointsReturnsCorrectResult(7, 0, "Incorrect score");
-  test_scorePointsReturnsCorrectResult(0, 5, "Incorrect score");
-  test_scorePointsReturnsCorrectResult(5, 8, "Incorrect score");
+  test_scoreReturnsCorrectResult(6, 2, "Incorrect score");
+  test_scoreReturnsCorrectResult(7, 0, "Incorrect score");
+  test_scoreReturnsCorrectResult(0, 5, "Incorrect score");
+  test_scoreReturnsCorrectResult(5, 8, "Incorrect score");
 }
 
