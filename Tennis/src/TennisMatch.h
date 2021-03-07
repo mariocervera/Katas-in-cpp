@@ -23,16 +23,20 @@ public:
 
 	string getResult() {
 		if (player1Score > 3) {
+			if (player2Score < player1Score - 1)
+				return player1 + " wins";
 			if (player2Score == player1Score - 1)
 				return "Advantage " + player1;
-			else if (player2Score == player1Score)
+			if (player2Score == player1Score)
 				return "Deuce";
 		}
 		
 		if (player2Score > 3) {
+			if (player1Score < player2Score - 1)
+				return player2 + " wins";
 			if (player1Score == player2Score - 1)
 				return "Advantage " + player2;
-			else if (player2Score == player1Score)
+			if (player2Score == player1Score)
 				return "Deuce";
 		}
 

@@ -76,3 +76,10 @@ TEST(TennisMatch, canScoreAdvantage) {
   test_scorePointsReturnsCorrectResult(3, 4, "Advantage " + PLAYER_2);
   test_scorePointsReturnsCorrectResult(8, 9, "Advantage " + PLAYER_2);
 }
+
+TEST(TennisMatch, getResultOfWinningGame_shouldReturnWinningPlayer) {
+  test_scorePointsReturnsCorrectResult(4, 2, PLAYER_1 + " wins");
+  test_scorePointsReturnsCorrectResult(6, 4, PLAYER_1 + " wins");
+  test_scorePointsReturnsCorrectResult(1, 4, PLAYER_2 + " wins");
+  test_scorePointsReturnsCorrectResult(5, 7, PLAYER_2 + " wins");
+}
