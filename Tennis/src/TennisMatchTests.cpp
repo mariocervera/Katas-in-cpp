@@ -16,18 +16,7 @@ static unique_ptr<TennisMatch> createMatchWithPlayer(const string& player) {
 //
 // Parameterized tests.
 //
-static void test_scorePointsForOnePlayer(unsigned points, const string &result) {
-  string player1 = "Player 1";
-  auto tennisMatch = createMatchWithPlayer(player1);
-
-  tennisMatch->score(player1, points);
-
-  ASSERT_EQ(tennisMatch->getScore(player1), result);
-}
-
-static void test_scorePointsForTwoPlayers(unsigned score1, unsigned score2,
-    const string &result1, const string &result2) {
-  
+static void test_scorePointsReturnsCorrectResult(unsigned score1, unsigned score2, const string &result) {
   string player1 = "Player 1";
   string player2 = "Player 2";
   auto tennisMatch = createMatchWithPlayers(player1, player2);
@@ -35,8 +24,7 @@ static void test_scorePointsForTwoPlayers(unsigned score1, unsigned score2,
   tennisMatch->score(player1, score1);
   tennisMatch->score(player2, score2);
 
-  ASSERT_EQ(tennisMatch->getScore(player1), result1);
-  ASSERT_EQ(tennisMatch->getScore(player2), result2);
+  ASSERT_EQ(tennisMatch->getResult(), result);
 }
 
 //
@@ -59,30 +47,24 @@ TEST(TennisMatch, scorePointCorrectPlayer_shouldSucceed) {
   ASSERT_TRUE(success);
 }
 
-TEST(TennisMatch, getScoreIncorrectPlayer_shouldFail) {
+TEST(TennisMatch, getResultWithoutScoring_shouldReturnLove) {
   auto tennisMatch = createMatch();
 
-  ASSERT_EQ(tennisMatch->getScore("IncorrectPlayer"), "Error");
+  ASSERT_EQ(tennisMatch->getResult(), "Love - Love");
 }
 
-TEST(TennisMatch, canScoreBasicPointsForOnePlayer) {
-  test_scorePointsForOnePlayer(1, "fifteen");
-  test_scorePointsForOnePlayer(2, "thirty");
-  test_scorePointsForOnePlayer(3, "forty");
-}
-
-TEST(TennisMatch, canGetLoveScore) {
-  string player1 = "Player 1";
-  auto tennisMatch = createMatchWithPlayer(player1);
-
-  ASSERT_EQ(tennisMatch->getScore(player1), "love");
-}
-
-TEST(TennisMatch, canScorePointsForDifferentPlayers) {
-  test_scorePointsForTwoPlayers(2, 3, "thirty", "forty");
+TEST(TennisMatch, canScoreBasicPoints) {
+  test_scorePointsReturnsCorrectResult(1, 0, "Fifteen - Love");
+  test_scorePointsReturnsCorrectResult(2, 0, "Thirty - Love");
+  test_scorePointsReturnsCorrectResult(3, 0, "Forty - Love");
+  test_scorePointsReturnsCorrectResult(1, 1, "Fifteen - Fifteen");
+  test_scorePointsReturnsCorrectResult(1, 2, "Fifteen - Thirty");
+  test_scorePointsReturnsCorrectResult(0, 3, "Love - Forty");
 }
 
 TEST(TennisMatch, canScoreDeuce) {
-  test_scorePointsForTwoPlayers(4, 4, "deuce", "deuce");
+  test_scorePointsReturnsCorrectResult(4, 4, "Deuce");
+  test_scorePointsReturnsCorrectResult(5, 5, "Deuce");
+  test_scorePointsReturnsCorrectResult(6, 6, "Deuce");
+  test_scorePointsReturnsCorrectResult(20, 20, "Deuce");
 }
-

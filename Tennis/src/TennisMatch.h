@@ -21,28 +21,23 @@ public:
 		return true;
 	}
 
-	string getScore(const string& player) {
-		if (player1Score == 4 && player2Score == 4)
-			return "deuce";
+	string getResult() {
+		if (player1Score == player1Score && player1Score > 3)
+			return "Deuce";
 
-		if (player == player1) 
-			return translateScore(player1Score);
-		if (player == player2)
-			return translateScore(player2Score);
-
-		return "Error";
+		return translate(player1Score) + " - " + translate(player2Score);
 	}
 
 private:
-	string translateScore(unsigned score) {
+	string translate(unsigned score) {
 		if (score == 0)
-			return "love";
+			return "Love";
 		if (score == 1)
-			return "fifteen";
+			return "Fifteen";
 		else if (score == 2)
-			return "thirty";
+			return "Thirty";
 		else
-			return "forty";
+			return "Forty";
 	}
 
 private:
