@@ -2,7 +2,7 @@
 
 using namespace std;
 
-static string getNonBasicResult(const string &player, unsigned playerScore, unsigned rivalScore) {
+static string getNonBasicResultForPlayer(const string &player, unsigned playerScore, unsigned rivalScore) {
   if (playerScore > 3) {
     if (rivalScore < playerScore - 1)
       return player + " wins";
@@ -35,18 +35,41 @@ public:
   }
 
   string getResult() {
-    string result = getNonBasicResult(player1, player1Score, player2Score);
+    if (isIncorrectResult())
+      return "Incorrect score";
+
+    if (isBasicResult())
+      return getBasicResult();
     
-    if (result == "")
-      result = getNonBasicResult(player2, player2Score, player1Score);
-
-    if (result == "")
-      result = translate(player1Score) + " - " + translate(player2Score);
-
-    return result;
+    return getNonBasicResult();
   }
 
 private:
+  bool isIncorrectResult() {
+    if (player1Score > player2Score && player1Score > 4 && player1Score - player2Score > 2)
+      return true;
+    
+    if (player2Score > player1Score && player2Score > 4 && player2Score - player1Score > 2)
+      return true;
+
+    return false;
+  }
+  bool isBasicResult() {
+    return player1Score < 4 && player2Score < 4;
+  }
+
+  string getBasicResult() {
+    return translate(player1Score) + " - " + translate(player2Score);
+  }
+
+  string getNonBasicResult() {
+    string result = getNonBasicResultForPlayer(player1, player1Score, player2Score);
+    if (result != "")
+      return result;
+
+   return getNonBasicResultForPlayer(player2, player2Score, player1Score);
+  }
+
   string translate(unsigned score) {
     if (score == 0)
       return "Love";

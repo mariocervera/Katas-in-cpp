@@ -82,3 +82,11 @@ TEST(TennisMatch, getResultOfWinningGame_shouldReturnWinningPlayer) {
   test_scorePointsReturnsCorrectResult(1, 4, PLAYER_2 + " wins");
   test_scorePointsReturnsCorrectResult(5, 7, PLAYER_2 + " wins");
 }
+
+TEST(TennisMatch, getResultWithIncorrectScores_shouldReturnError) {
+  test_scorePointsReturnsCorrectResult(6, 2, "Incorrect score");
+  test_scorePointsReturnsCorrectResult(7, 0, "Incorrect score");
+  test_scorePointsReturnsCorrectResult(0, 5, "Incorrect score");
+  test_scorePointsReturnsCorrectResult(5, 8, "Incorrect score");
+}
+
