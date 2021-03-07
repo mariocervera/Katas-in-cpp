@@ -56,7 +56,7 @@ TEST(TennisMatch, getResultWithoutScoring_shouldReturnLove) {
 TEST(TennisMatch, scoreBasicPoints_shouldReturnCorrectResult) {
   test_scoreReturnsCorrectResult(1, 0, "Fifteen - Love");
   test_scoreReturnsCorrectResult(2, 0, "Thirty - Love");
-  test_scoreReturnsCorrectResult(3, 0, "Forty - Love");
+  test_scoreReturnsCorrectResult(3, 2, "Forty - Thirty");
   test_scoreReturnsCorrectResult(1, 1, "Fifteen - Fifteen");
   test_scoreReturnsCorrectResult(1, 2, "Fifteen - Thirty");
   test_scoreReturnsCorrectResult(0, 3, "Love - Forty");
@@ -69,23 +69,25 @@ TEST(TennisMatch, scoreDeuce_shouldReturnCorrectResult) {
   test_scoreReturnsCorrectResult(20, 20, "Deuce");
 }
 
-TEST(TennisMatch, canScoreAdvantage) {
+TEST(TennisMatch, scoreAdvantage_shouldReturnCorrectResult) {
   test_scoreReturnsCorrectResult(4, 3, "Advantage " + PLAYER_1);
   test_scoreReturnsCorrectResult(6, 5, "Advantage " + PLAYER_1);
   test_scoreReturnsCorrectResult(3, 4, "Advantage " + PLAYER_2);
   test_scoreReturnsCorrectResult(8, 9, "Advantage " + PLAYER_2);
 }
 
-TEST(TennisMatch, getResultOfWinningGame_shouldReturnWinningPlayer) {
+TEST(TennisMatch, scoreWinningGame_shouldReturnCorrectResult) {
+  test_scoreReturnsCorrectResult(4, 0, PLAYER_1 + " wins");
   test_scoreReturnsCorrectResult(4, 2, PLAYER_1 + " wins");
-  test_scoreReturnsCorrectResult(6, 4, PLAYER_1 + " wins");
+  test_scoreReturnsCorrectResult(5, 3, PLAYER_1 + " wins");
   test_scoreReturnsCorrectResult(1, 4, PLAYER_2 + " wins");
+  test_scoreReturnsCorrectResult(4, 6, PLAYER_2 + " wins");
   test_scoreReturnsCorrectResult(5, 7, PLAYER_2 + " wins");
 }
 
-TEST(TennisMatch, getResultWithIncorrectScores_shouldReturnError) {
+TEST(TennisMatch, scoreIncorrectValues_shouldReturnError) {
+  test_scoreReturnsCorrectResult(5, 0, "Incorrect score");
   test_scoreReturnsCorrectResult(6, 2, "Incorrect score");
-  test_scoreReturnsCorrectResult(7, 0, "Incorrect score");
   test_scoreReturnsCorrectResult(0, 5, "Incorrect score");
   test_scoreReturnsCorrectResult(5, 8, "Incorrect score");
 }
