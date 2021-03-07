@@ -40,10 +40,9 @@ TEST(TennisMatch, scorePointIncorrectPlayer_shouldFail) {
 }
 
 TEST(TennisMatch, scorePointCorrectPlayer_shouldSucceed) {
-  string player1 = "Player 1";
-  auto tennisMatch = createMatchWithPlayer(player1);
+  auto tennisMatch = createMatchWithPlayer(PLAYER_1);
 
-  bool success = tennisMatch->score(player1);
+  bool success = tennisMatch->score(PLAYER_1);
 
   ASSERT_TRUE(success);
 }
