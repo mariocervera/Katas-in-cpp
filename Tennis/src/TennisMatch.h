@@ -10,16 +10,15 @@ public:
 
 public:
 	bool score(const string& player, unsigned points = 1) {
-		if (player == player1) {
-			player1Score += points;
-			return true;
-		}
-		else if (player == player2) {
-			player2Score += points;
-			return true;
-		}
+		if (player != player1 && player != player2)
+			return false;
 		
-		return false;
+		if (player == player1)
+			player1Score += points;
+		else if (player == player2)
+			player2Score += points;
+		
+		return true;
 	}
 
 	string getScore(const string& player) {
@@ -35,8 +34,10 @@ private:
 	string translateScore(unsigned score) {
 		if (score == 1)
 			return "fifteen";
-		else
+		else if (score == 2)
 			return "thirty";
+		else
+			return "forty";
 	}
 
 private:
