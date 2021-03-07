@@ -2,40 +2,26 @@
 
 using namespace std;
 
-static string getNonBasicResultForPlayer(const string &player, unsigned playerScore, unsigned rivalScore) {
-  if (playerScore > 3) {
-    if (rivalScore < playerScore - 1)
-      return player + " wins";
-    if (rivalScore == playerScore - 1)
-      return "Advantage " + player;
-  }
-
-  if (rivalScore == playerScore)
-    return "Deuce";
-
-  return "";
-}
-
 class TennisMatch {
 
 public:
-  TennisMatch(const string& player1, const string& player2) :
-    player1(player1), player2(player2), player1Score(0), player2Score(0){}
+  TennisMatch(const string &player1, const string &player2) :
+    player1(player1), player2(player2), scorePlayer1(0), scorePlayer2(0) { }
 
 public:
   bool score(const string& player, unsigned points = 1) {
-    if (player != player1 && player != player2)
+    if (!isCorrectPlayer(player))
       return false;
     
     if (player == player1)
-      player1Score += points;
-    else if (player == player2)
-      player2Score += points;
+      scorePlayer1 += points;
+    else
+      scorePlayer2 += points;
     
     return true;
   }
 
-  string getResult() {
+  string getMatchResult() {
     if (isIncorrectResult())
       return "Incorrect score";
 
@@ -46,29 +32,47 @@ public:
   }
 
 private:
+  bool isCorrectPlayer(const string &player) {
+    return player == player1 || player == player2;
+  }
+
   bool isIncorrectResult() {
-    if (player1Score > player2Score && player1Score > 4 && player1Score - player2Score > 2)
-      return true;
+    if (scorePlayer1 > scorePlayer2)
+      return (scorePlayer1 > 4 && scorePlayer1 - scorePlayer2 > 2);
     
-    if (player2Score > player1Score && player2Score > 4 && player2Score - player1Score > 2)
-      return true;
+    if (scorePlayer2 > scorePlayer1)
+      return (scorePlayer2 > 4 && scorePlayer2 - scorePlayer1 > 2);
 
     return false;
   }
   bool isBasicResult() {
-    return (player1Score < 3 || player2Score < 3) && player1Score < 4 && player2Score < 4;
+    return (scorePlayer1 < 3 || scorePlayer2 < 3) && scorePlayer1 < 4 && scorePlayer2 < 4;
   }
 
   string getBasicResult() {
-    return translate(player1Score) + " - " + translate(player2Score);
+    return translate(scorePlayer1) + " - " + translate(scorePlayer2);
   }
 
   string getNonBasicResult() {
-    string result = getNonBasicResultForPlayer(player1, player1Score, player2Score);
+    string result = getNonBasicResultForPlayer(player1, scorePlayer1, scorePlayer2);
     if (result != "")
       return result;
 
-   return getNonBasicResultForPlayer(player2, player2Score, player1Score);
+   return getNonBasicResultForPlayer(player2, scorePlayer2, scorePlayer1);
+  }
+
+  string getNonBasicResultForPlayer(const string& player, unsigned playerScore, unsigned rivalScore) {
+    if (playerScore > 3) {
+      if (rivalScore < playerScore - 1)
+        return player + " wins";
+      if (rivalScore == playerScore - 1)
+        return "Advantage " + player;
+    }
+
+    if (rivalScore == playerScore)
+      return "Deuce";
+
+    return "";
   }
 
   string translate(unsigned score) {
@@ -85,6 +89,6 @@ private:
 private:
   const string player1;
   const string player2;
-  unsigned player1Score;
-  unsigned player2Score;
+  unsigned scorePlayer1;
+  unsigned scorePlayer2;
 };

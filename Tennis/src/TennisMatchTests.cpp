@@ -25,7 +25,7 @@ static void test_scoreReturnsCorrectResult(unsigned scoreP1, unsigned scoreP2, c
   tennisMatch->score(PLAYER_1, scoreP1);
   tennisMatch->score(PLAYER_2, scoreP2);
 
-  ASSERT_EQ(tennisMatch->getResult(), expectedResult);
+  ASSERT_EQ(tennisMatch->getMatchResult(), expectedResult);
 }
 
 //
@@ -50,7 +50,7 @@ TEST(TennisMatch, scorePointForCorrectPlayer_shouldSucceed) {
 TEST(TennisMatch, getResultWithoutScoring_shouldReturnLove) {
   auto tennisMatch = createMatch();
 
-  ASSERT_EQ(tennisMatch->getResult(), "Love - Love");
+  ASSERT_EQ(tennisMatch->getMatchResult(), "Love - Love");
 }
 
 TEST(TennisMatch, scoreBasicPoints_shouldReturnCorrectResult) {
