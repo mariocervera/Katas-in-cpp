@@ -2,7 +2,7 @@
 
 using namespace std;
 
-static string rawScores[4] = { "Love", "Fifteen", "Thirty", "Forty" };
+static string rawScores[4] = {"Love", "Fifteen", "Thirty", "Forty"};
 
 class TennisMatch {
 
@@ -11,7 +11,7 @@ public:
     player1(player1), player2(player2), scorePlayer1(0), scorePlayer2(0) { }
 
 public:
-  bool score(const string& player, unsigned points = 1) {
+  bool score(const string &player, unsigned points = 1) {
     if (!isCorrectPlayer(player))
       return false;
     
@@ -30,7 +30,10 @@ public:
     if (isRawResult())
       return getRawResult();
     
-    return getNonBasicResult();
+    if (scorePlayer1 == scorePlayer2)
+      return "Deuce";
+
+    return handleAdvantageOrWin();
   }
 
 private:
@@ -59,25 +62,21 @@ private:
     return rawScores[scorePlayer1] + " - " + rawScores[scorePlayer2];
   }
 
-  string getNonBasicResult() {
-    string result = getNonBasicResultForPlayer(player1, scorePlayer1, scorePlayer2);
+  string handleAdvantageOrWin() {
+    string result = getAdvantageOrWinResult(player1, scorePlayer1, scorePlayer2);
+    
     if (result != "")
       return result;
-
-   return getNonBasicResultForPlayer(player2, scorePlayer2, scorePlayer1);
+    
+    return getAdvantageOrWinResult(player2, scorePlayer2, scorePlayer1);
   }
 
-  string getNonBasicResultForPlayer(const string& player, unsigned playerScore, unsigned rivalScore) {
-    if (playerScore > 3) {
-      if (rivalScore < playerScore - 1)
-        return player + " wins";
-      if (rivalScore == playerScore - 1)
-        return "Advantage " + player;
-    }
-
-    if (rivalScore == playerScore)
-      return "Deuce";
-
+  string getAdvantageOrWinResult(const string &player, unsigned playerScore, unsigned rivalScore) {
+    if (rivalScore == playerScore - 1)
+      return "Advantage " + player;
+    if (rivalScore < playerScore - 1)
+      return player + " wins";
+    
     return "";
   }
 
