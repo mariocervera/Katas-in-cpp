@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "TennisMatch.h"
+#include "TennisMatch.hpp"
 
 static const string PLAYER_1 = "Player 1";
 static const string PLAYER_2 = "Player 2";
@@ -19,11 +19,11 @@ static unique_ptr<TennisMatch> createMatch() {
 //
 // Parameterized test.
 //
-static void test_scoreReturnsCorrectResult(unsigned scoreP1, unsigned scoreP2, const string &expectedResult) {
+static void test_scoreReturnsCorrectResult(unsigned scorePlayer1, unsigned scorePlayer2, const string &expectedResult) {
   auto tennisMatch = createMatchWithPlayers(PLAYER_1, PLAYER_2);
 
-  tennisMatch->score(PLAYER_1, scoreP1);
-  tennisMatch->score(PLAYER_2, scoreP2);
+  tennisMatch->score(PLAYER_1, scorePlayer1);
+  tennisMatch->score(PLAYER_2, scorePlayer2);
 
   ASSERT_EQ(tennisMatch->getMatchResult(), expectedResult);
 }

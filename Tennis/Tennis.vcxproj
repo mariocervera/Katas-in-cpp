@@ -34,7 +34,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\TennisMatch.h" />
+    <ClInclude Include="src\TennisMatch.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\TennisMatchTests.cpp" />

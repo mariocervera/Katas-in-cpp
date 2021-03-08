@@ -1,7 +1,7 @@
 
 ## Problem statement
 
-You task is to implement a tennis scoring program.
+Your task is to implement a tennis scoring program.
 
 Summary of tennis scoring:
 
