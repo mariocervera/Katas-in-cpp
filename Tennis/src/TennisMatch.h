@@ -42,17 +42,14 @@ private:
   }
 
   bool isIncorrectResult() {
-    if (scorePlayer1 > scorePlayer2)
-      return (scorePlayer1 > 4 && scorePlayer1 - scorePlayer2 > 2);
-    
-    if (scorePlayer2 > scorePlayer1)
-      return (scorePlayer2 > 4 && scorePlayer2 - scorePlayer1 > 2);
+    bool player1WinsByMoreThan2Points = scorePlayer1 > scorePlayer2 && scorePlayer1 > 4 && scorePlayer1 - scorePlayer2 > 2;
+    bool player2WinsByMoreThan2Points = scorePlayer2 > scorePlayer1 && scorePlayer2 > 4 && scorePlayer2 - scorePlayer1 > 2;
 
-    return false;
+    return player1WinsByMoreThan2Points || player2WinsByMoreThan2Points;
   }
 
   bool isRawResult() {
-    bool bothPlayersFortyOrLess = scorePlayer1 < 4 && scorePlayer2 < 4;
+    bool bothPlayersFortyOrLess = scorePlayer1 <= 3 && scorePlayer2 <= 3;
     bool atLeastOnePlayerIsNotForty = scorePlayer1 < 3 || scorePlayer2 < 3;
     
     return bothPlayersFortyOrLess && atLeastOnePlayerIsNotForty;
